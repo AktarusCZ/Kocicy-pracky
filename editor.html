@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Editor událostí – Kočičí pracky</title>
+
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+
+<style>
+body {
+  font-family: 'EB Garamond', serif;
+  background: #141414;
+  color: #eaeaea;
+  max-width: 600px;
+  margin: auto;
+  padding: 40px;
+}
+input, textarea, button {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+button {
+  background: #d9a441;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+pre {
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>✍️ Editor událostí</h2>
+
+<input id="quizName" placeholder="Název kvízu">
+<input id="date" placeholder="Datum (DD.MM.RRRR)">
+<input id="points" type="number" placeholder="Body">
+<input id="position" type="number" placeholder="Umístění">
+<textarea id="desc" placeholder="Popis"></textarea>
+
+<button onclick="addEvent()">Přidat</button>
+
+<pre id="output"></pre>
+
+<script>
+let events = [];
+
+function addEvent() {
+  events.unshift({
+    quizName: quizName.value,
+    date: date.value,
+    points: Number(points.value),
+    position: Number(position.value),
+    description: desc.value
+  });
+
+  output.textContent = JSON.stringify(events, null, 2);
+}
+</script>
+
+</body>
+</html>
