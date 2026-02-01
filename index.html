@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Družstvo kočičí pracky</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0f0f14;
+      --panel: #1a1a1a;
+      --text: #eaeaea;
+      --muted: #bdbdbd;
+      --gold: #d9a441;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'EB Garamond', serif;
+      background: linear-gradient(180deg, #0f0f14, #141414);
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    header {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 22px;
+      letter-spacing: 2px;
+      font-weight: 800;
+    }
+
+    nav a {
+      color: var(--muted);
+      margin-left: 20px;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    nav a:hover { color: var(--gold); }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .hero .meta {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+
+    .hero h2 {
+      font-size: clamp(28px, 5vw, 52px);
+      color: var(--gold);
+      font-weight: 800;
+      line-height: 1.2;
+      margin: 20px 0 30px;
+    }
+
+    .hero img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 25px;
+    }
+
+    /* SECTIONS */
+    section {
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 40px;
+    }
+
+    section h3 {
+      margin-top: 0;
+      text-align: center;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    /* LISTS */
+    .members,
+    .quizzes {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .members li,
+    .quizzes li {
+      padding: 10px 0;
+      border-bottom: 1px solid #2a2a2a;
+    }
+
+    .members li:last-child,
+    .quizzes li:last-child {
+      border-bottom: none;
+    }
+
+    .quizzes span {
+      color: var(--muted);
+      font-size: 15px;
+      font-style: italic;
+    }
+
+    /* LIGA */
+    .liga {
+      text-align: center;
+    }
+
+    .liga-text {
+      color: var(--muted);
+      margin-bottom: 25px;
+      font-style: italic;
+    }
+
+    .liga-button {
+      display: inline-block;
+      padding: 12px 30px;
+      border: 1px solid var(--gold);
+      border-radius: 30px;
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: all 0.25s ease;
+    }
+
+    .liga-button:hover {
+      background: var(--gold);
+      color: #111;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 40px 20px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🐾 KOČIČÍ PRACKY</h1>
+  <nav>
+    <a href="#tym">TÝM</a>
+    <a href="#kvizy">KVÍZY</a>
+    <a href="#liga">LIGA</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="hero">
+    <div class="meta">Blog · aktualizováno 2026</div>
+    <h2>Mňau. Víme to.<br>Když ne, tipujeme s grácií.</h2>
+    <img src="paws.jpg" alt="Kočičí pracky">
+    <p class="meta">
+      Družstvo kočičí pracky je hospodský kvízový tým poháněný intuicí,
+      zbytečnými znalostmi a pivem.
+    </p>
+  </div>
+
+  <section id="tym">
+    <h3>Členové týmu</h3>
+    <ul class="members" id="members"></ul>
+  </section>
+
+  <section id="kvizy">
+    <h3>Účast na kvízech</h3>
+    <ul class="quizzes" id="quizzes"></ul>
+  </section>
+
+  <section id="liga" class="liga">
+    <h3>LIGA</h3>
+    <p class="liga-text">
+      Aktuální tabulka týmové ligy hospodského kvízu.
+    </p>
+    <a class="liga-button"
+       href="https://keepthescore.com/board/wwwnwphxgxpzr/"
+       target="_blank"
+       rel="noopener noreferrer">
+       📊 Otevřít ligovou tabulku
+    </a>
+  </section>
+
+</main>
+
+<footer>
+  © Družstvo kočičí pracky
+</footer>
+
+<script>
+  const members = [
+    { name: "Kocour Alfa", role: "Honza" },
+    { name: "Šedá Eminence", role: "Terka" },
+    { name: "Ten co googlí pohledem", role: "Radek" },
+    { name: "-", role: "Simča" },
+    { name: "-", role: "Jirka" },
+    { name: "-", role: "Barča" },
+    { name: "-", role: "Honza" },
+    { name: "-", role: "Míša" },
+    { name: "-", role: "Kačka" }
+  ];
+
+  const quizzes = [
+    { date: "27. 1. 2026", pub: "SERIÁLOVÉ ZNĚLKY", points: 12, place: 14 },
+    { date: "20. 1. 2026", pub: "STRANGER THINGS", points: 28.5, place: 10 }
+  ];
+
+  const membersEl = document.getElementById("members");
+  members.forEach(m => {
+    membersEl.innerHTML += `<li><strong>${m.name}</strong> – ${m.role}</li>`;
+  });
+
+  const quizzesEl = document.getElementById("quizzes");
+  quizzes.forEach(q => {
+    quizzesEl.innerHTML += `
+      <li>
+        <strong>${q.pub}</strong> (${q.date})<br>
+        <span>Body: ${q.points} · Umístění: ${q.place}. místo</span>
+      </li>
+    `;
+  });
+</script>
+
+</body>
+</html>
