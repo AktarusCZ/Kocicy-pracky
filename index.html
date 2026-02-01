@@ -1,162 +1,176 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Družstvo kočičí pracky</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Družstvo kočičí pracky</title>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
 
-<style>
-:root {
-  --bg: #0f0f14;
-  --panel: #1a1a1a;
-  --text: #eaeaea;
-  --muted: #bdbdbd;
-  --gold: #d9a441;
-}
+  <style>
+    :root {
+      --bg: #0f0f14;
+      --panel: #1a1a1a;
+      --text: #eaeaea;
+      --muted: #bdbdbd;
+      --gold: #d9a441;
+    }
 
-* { box-sizing: border-box; }
+    * { box-sizing: border-box; }
 
-body {
-  margin: 0;
-  font-family: 'EB Garamond', serif;
-  background: linear-gradient(180deg, #0f0f14, #141414);
-  color: var(--text);
-  font-size: 18px;
-  line-height: 1.7;
-}
+    body {
+      margin: 0;
+      font-family: 'EB Garamond', serif;
+      background: linear-gradient(180deg, #0f0f14, #141414);
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.7;
+    }
 
-/* HEADER */
-header {
-  max-width: 1000px;
-  margin: auto;
-  padding: 40px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    /* HEADER */
+    header {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-header h1 {
-  font-size: 22px;
-  letter-spacing: 2px;
-  font-weight: 800;
-}
+    header h1 {
+      font-size: 22px;
+      letter-spacing: 2px;
+      font-weight: 800;
+    }
 
-nav a {
-  color: var(--muted);
-  margin-left: 20px;
-  text-decoration: none;
-  font-size: 14px;
-}
+    nav a {
+      color: var(--muted);
+      margin-left: 20px;
+      text-decoration: none;
+      font-size: 14px;
+    }
 
-nav a:hover { color: var(--gold); }
+    nav a:hover { color: var(--gold); }
 
-/* MAIN */
-main {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
-}
+    /* MAIN */
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
 
-/* HERO */
-.hero {
-  text-align: center;
-  margin-bottom: 60px;
-}
+    /* HERO */
+    .hero {
+      text-align: center;
+      margin-bottom: 60px;
+    }
 
-.hero .meta {
-  color: var(--muted);
-  font-size: 14px;
-  font-style: italic;
-}
+    .hero .meta {
+      color: var(--muted);
+      font-size: 14px;
+      font-style: italic;
+    }
 
-.hero h2 {
-  font-size: clamp(28px, 5vw, 52px);
-  color: var(--gold);
-  font-weight: 800;
-  margin: 20px 0 30px;
-}
+    .hero h2 {
+      font-size: clamp(28px, 5vw, 52px);
+      color: var(--gold);
+      font-weight: 800;
+      margin: 20px 0 30px;
+    }
 
-.hero img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
+    .hero img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
 
-/* SECTIONS */
-section {
-  background: var(--panel);
-  border-radius: 10px;
-  padding: 35px 30px;
-  margin-bottom: 40px;
-}
+    /* SECTIONS */
+    section {
+      background: var(--panel);
+      border-radius: 10px;
+      padding: 35px 30px;
+      margin-bottom: 40px;
+    }
 
-section h3 {
-  text-align: center;
-  color: var(--gold);
-  margin-bottom: 25px;
-  letter-spacing: 1px;
-}
+    section h3 {
+      text-align: center;
+      color: var(--gold);
+      margin-bottom: 25px;
+      letter-spacing: 1px;
+    }
 
-/* LISTS */
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+    /* LISTS */
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-li {
-  padding: 12px 0;
-  border-bottom: 1px solid #2a2a2a;
-}
+    li {
+      padding: 12px 0;
+      border-bottom: 1px solid #2a2a2a;
+    }
 
-li:last-child { border-bottom: none; }
+    li:last-child { border-bottom: none; }
 
-.small {
-  color: var(--muted);
-  font-style: italic;
-}
+    .small {
+      color: var(--muted);
+      font-style: italic;
+    }
 
-/* EVENTS */
-.event {
-  margin-bottom: 25px;
-}
+    /* EVENTS */
+    .event {
+      margin-bottom: 25px;
+    }
 
-.event h4 {
-  color: var(--gold);
-  margin-bottom: 5px;
-}
+    .event h4 {
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
 
-/* LIGA */
-.liga {
-  text-align: center;
-}
+    .event .collage {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
 
-.liga a {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 12px 32px;
-  border: 1px solid var(--gold);
-  border-radius: 30px;
-  color: var(--gold);
-  text-decoration: none;
-}
+    .event .collage img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      max-height: 200px;
+    }
 
-.liga a:hover {
-  background: var(--gold);
-  color: #111;
-}
+    /* LIGA */
+    .liga {
+      text-align: center;
+    }
 
-/* FOOTER */
-footer {
-  text-align: center;
-  color: var(--muted);
-  padding: 40px 20px;
-  font-size: 14px;
-}
-</style>
+    .liga a {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 32px;
+      border: 1px solid var(--gold);
+      border-radius: 30px;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .liga a:hover {
+      background: var(--gold);
+      color: #111;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 40px 20px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 
 <body>
@@ -206,7 +220,6 @@ footer {
 <!-- QUIZZES -->
 <section id="kvizy">
   <h3>KVÍZY</h3>
-
   <!-- Kvízy pro rok 2026 -->
   <h4>2026</h4>
   <ul>
@@ -257,17 +270,30 @@ fetch("events.json")
   .then(data => {
     const el = document.getElementById("events");
     data.forEach(e => {
-      el.innerHTML += `
+      let eventHTML = `
         <div class="event">
           <h4>${e.quizName}</h4>
           <div class="small">${e.date} · ${e.points} bodů · ${e.position}. místo</div>
           <p>${e.description}</p>
-        </div>
       `;
+      
+      // Pokud má událost obrázky, přidáme je do koláže
+      if (e.photos && e.photos.length > 0) {
+        eventHTML += '<div class="collage">';
+        e.photos.forEach(photo => {
+          eventHTML += `<img src="${photo}" alt="Obrázek události">`;
+        });
+        eventHTML += '</div>';
+      }
+
+      eventHTML += '</div>';
+      el.innerHTML += eventHTML;
     });
+  })
+  .catch(error => {
+    console.error('Chyba při načítání souboru:', error);
   });
 </script>
 
 </body>
 </html>
-
