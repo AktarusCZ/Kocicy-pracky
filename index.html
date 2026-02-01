@@ -1,167 +1,162 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Družstvo kočičí pracky</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Družstvo kočičí pracky</title>
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --bg: #0f0f14;
-      --panel: #1a1a1a;
-      --text: #eaeaea;
-      --muted: #bdbdbd;
-      --gold: #d9a441;
-    }
+<style>
+:root {
+  --bg: #0f0f14;
+  --panel: #1a1a1a;
+  --text: #eaeaea;
+  --muted: #bdbdbd;
+  --gold: #d9a441;
+}
 
-    * { box-sizing: border-box; }
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      font-family: 'EB Garamond', serif;
-      background: linear-gradient(180deg, #0f0f14, #141414);
-      color: var(--text);
-      font-size: 18px;
-      line-height: 1.6;
-    }
+body {
+  margin: 0;
+  font-family: 'EB Garamond', serif;
+  background: linear-gradient(180deg, #0f0f14, #141414);
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.7;
+}
 
-    header {
-      max-width: 1000px;
-      margin: auto;
-      padding: 40px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+/* HEADER */
+header {
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    header h1 {
-      font-size: 22px;
-      letter-spacing: 2px;
-      font-weight: 800;
-    }
+header h1 {
+  font-size: 22px;
+  letter-spacing: 2px;
+  font-weight: 800;
+}
 
-    nav a {
-      color: var(--muted);
-      margin-left: 20px;
-      text-decoration: none;
-      font-size: 14px;
-      letter-spacing: 1px;
-    }
+nav a {
+  color: var(--muted);
+  margin-left: 20px;
+  text-decoration: none;
+  font-size: 14px;
+}
 
-    nav a:hover { color: var(--gold); }
+nav a:hover { color: var(--gold); }
 
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-    }
+/* MAIN */
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
 
-    /* HERO */
-    .hero {
-      text-align: center;
-      margin-bottom: 60px;
-    }
+/* HERO */
+.hero {
+  text-align: center;
+  margin-bottom: 60px;
+}
 
-    .hero .meta {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 10px;
-      font-style: italic;
-    }
+.hero .meta {
+  color: var(--muted);
+  font-size: 14px;
+  font-style: italic;
+}
 
-    .hero h2 {
-      font-size: clamp(28px, 5vw, 52px);
-      color: var(--gold);
-      font-weight: 800;
-      line-height: 1.2;
-      margin: 20px 0 30px;
-    }
+.hero h2 {
+  font-size: clamp(28px, 5vw, 52px);
+  color: var(--gold);
+  font-weight: 800;
+  margin: 20px 0 30px;
+}
 
-    .hero img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 25px;
-    }
+.hero img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
 
-    /* SECTIONS */
-    section {
-      background: var(--panel);
-      border-radius: 8px;
-      padding: 30px;
-      margin-bottom: 40px;
-    }
+/* SECTIONS */
+section {
+  background: var(--panel);
+  border-radius: 10px;
+  padding: 35px 30px;
+  margin-bottom: 40px;
+}
 
-    section h3 {
-      margin-top: 0;
-      text-align: center;
-      color: var(--gold);
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-    }
+section h3 {
+  text-align: center;
+  color: var(--gold);
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
 
-    /* LISTS */
-    .members,
-    .quizzes {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+/* LISTS */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    .members li,
-    .quizzes li {
-      padding: 10px 0;
-      border-bottom: 1px solid #2a2a2a;
-    }
+li {
+  padding: 12px 0;
+  border-bottom: 1px solid #2a2a2a;
+}
 
-    .members li:last-child,
-    .quizzes li:last-child {
-      border-bottom: none;
-    }
+li:last-child { border-bottom: none; }
 
-    .quizzes span {
-      color: var(--muted);
-      font-size: 15px;
-      font-style: italic;
-    }
+.small {
+  color: var(--muted);
+  font-style: italic;
+}
 
-    /* LIGA */
-    .liga {
-      text-align: center;
-    }
+/* EVENTS */
+.event {
+  margin-bottom: 25px;
+}
 
-    .liga-text {
-      color: var(--muted);
-      margin-bottom: 25px;
-      font-style: italic;
-    }
+.event h4 {
+  color: var(--gold);
+  margin-bottom: 5px;
+}
 
-    .liga-button {
-      display: inline-block;
-      padding: 12px 30px;
-      border: 1px solid var(--gold);
-      border-radius: 30px;
-      color: var(--gold);
-      text-decoration: none;
-      font-weight: 600;
-      letter-spacing: 1px;
-      transition: all 0.25s ease;
-    }
+/* LIGA */
+.liga {
+  text-align: center;
+}
 
-    .liga-button:hover {
-      background: var(--gold);
-      color: #111;
-    }
+.liga a {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 32px;
+  border: 1px solid var(--gold);
+  border-radius: 30px;
+  color: var(--gold);
+  text-decoration: none;
+}
 
-    footer {
-      text-align: center;
-      color: var(--muted);
-      padding: 40px 20px;
-      font-size: 14px;
-    }
-  </style>
+.liga a:hover {
+  background: var(--gold);
+  color: #111;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 40px 20px;
+  font-size: 14px;
+}
+</style>
 </head>
 
 <body>
@@ -169,6 +164,7 @@
 <header>
   <h1>🐾 KOČIČÍ PRACKY</h1>
   <nav>
+    <a href="#udalosti">UDÁLOSTI</a>
     <a href="#tym">TÝM</a>
     <a href="#kvizy">KVÍZY</a>
     <a href="#liga">LIGA</a>
@@ -177,110 +173,98 @@
 
 <main>
 
-  <div class="hero">
-    <div class="meta">Blog · aktualizováno 2026</div>
-    <h2>Mňau. Víme to.<br>Když ne, tipujeme s grácií.</h2>
-    <img src="paws.jpg" alt="Kočičí pracky">
-    <p class="meta">
-      Družstvo kočičí pracky je hospodský kvízový tým poháněný intuicí,
-      zbytečnými znalostmi a pivem.
-    </p>
-  </div>
+<!-- HERO -->
+<div class="hero">
+  <div class="meta">Blog - aktualizován 01.02.2026</div>
+  <h2>Mňau. Víme to.<br>Když ne, tipujeme s grácií.</h2>
+  <img src="paws.jpg" alt="Kočičí pracky">
+  <p class="meta">Družstvo kočičí pracky je hospodský kvízový tým poháněný intuicí, zbytečnými znalostmi a pivem.</p>
+</div>
 
-  <section id="tym">
-    <h3>ČLENOVÉ TÝMU</h3>
-    <ul class="members" id="members"></ul>
-  </section>
+<!-- EVENTS -->
+<section id="udalosti">
+  <h3>UDÁLOSTI</h3>
+  <div id="events"></div>
+</section>
 
-  <section id="kvizy">
-    <h3>ÚČAST NA KVÍZECH</h3>
-    <ul class="quizzes" id="quizzes"></ul>
-  </section>
+<!-- TEAM -->
+<section id="tym">
+  <h3>ČLENOVÉ TÝMU</h3>
+  <ul>
+    <li><strong>-</strong> – Honza</li>
+    <li><strong>-</strong> – Terka</li>
+    <li><strong>-</strong> – Radek</li>
+    <li><strong>-</strong> – Simča</li>
+    <li><strong>-</strong> – Jirka</li>
+    <li><strong>-</strong> – Barča</li>
+    <li><strong>-</strong> – Honza</li>
+    <li><strong>-</strong> – Míša</li>
+    <li><strong>-</strong> – Kačka</li>
+  </ul>
+</section>
 
-  <section id="liga" class="liga">
-    <h3>LIGA</h3>
-    <p class="liga-text">
-      Aktuální tabulka týmové ligy hospodského kvízu.
-    </p>
-    <a class="liga-button"
-       href="https://keepthescore.com/board/wwwnwphxgxpzr/"
-       target="_blank"
-       rel="noopener noreferrer">
-       📊 Otevřít ligovou tabulku
-    </a>
-  </section>
+<!-- QUIZZES -->
+<section id="kvizy">
+  <h3>KVÍZY</h3>
+
+  <!-- Kvízy pro rok 2026 -->
+  <h4>2026</h4>
+  <ul>
+    <li>
+      <strong>SERIÁLOVÉ ZNĚLKY</strong><br>
+      <span class="small">27. 1. 2026 · 12 bodů · 14. místo</span>
+    </li>
+    <li>
+      <strong>STRANGER THINGS</strong><br>
+      <span class="small">20. 1. 2026 · 28,5 bodu · 10. místo</span>
+    </li>
+  </ul>
+
+  <!-- Kvízy pro rok 2025 -->
+  <h4>2025</h4>
+  <ul>
+    <li>
+      <strong>JAK JSEM POZNAL VAŠI MATKU</strong><br>
+      <span class="small">25. 11. 2025 · 0 bodů · 0. místo</span>
+    </li>
+    <li>
+      <strong>FILMOVÉ ZNĚLKY</strong><br>
+      <span class="small">11. 11. 2025 · 0 bodů · 0. místo</span>
+    </li>
+    <li>
+      <strong>PORÁTI Z KARIBIKU</strong><br>
+      <span class="small">14. 10. 2025 · 0 bodů · 0. místo</span>
+    </li>
+  </ul>
+</section>
+
+<!-- LIGA -->
+<section id="liga" class="liga">
+  <h3>LIGA</h3>
+  <p class="small">Aktuální tabulka týmové ligy</p>
+  <a href="https://keepthescore.com/board/wwwnwphxgxpzr/" target="_blank">
+    📊 Otevřít ligu
+  </a>
+</section>
 
 </main>
 
-<footer>
-  © Družstvo kočičí pracky
-</footer>
+<footer>© Družstvo kočičí pracky</footer>
 
 <script>
-  const members = [
-    { name: "-", role: "Honza" },
-    { name: "-", role: "Terka" },
-    { name: "-", role: "Radek" },
-    { name: "-", role: "Simča" },
-    { name: "-", role: "Jirka" },
-    { name: "-", role: "Barča" },
-    { name: "-", role: "Honza" },
-    { name: "-", role: "Míša" },
-    { name: "-", role: "Kačka" }
-  ];
-
-  const quizzes = [
-    { date: "27. 1. 2026", pub: "SERIÁLOVÉ ZNĚLKY", points: 12, place: 14 },
-    { date: "20. 1. 2026", pub: "STRANGER THINGS", points: 28.5, place: 10 },
-    { date: "25. 11. 2025", pub: "JAK JSEM POZNAL VAŠI MATKU", points: 0, place: 0 },
-    { date: "11. 11. 2025", pub: "FILMOVÉ ZNĚLKY", points: 0, place: 0 },
-    { date: "14. 10. 2025", pub: "PORÁTI Z KARIBIKU", points: 0, place: 0 },
-  ];
-
-  // Funkce pro převod českého formátu data na Date objekt
-  function parseCzechDate(dateString) {
-    const [day, month, year] = dateString.split('.').map(part => part.trim());
-    return new Date(`${year}-${month}-${day}`);
-  }
-
-  // Seřadit kvízy podle data (nejnovější nahoře)
-  quizzes.sort((a, b) => parseCzechDate(b.date) - parseCzechDate(a.date));
-
-  const membersEl = document.getElementById("members");
-  members.forEach(m => {
-    const li = document.createElement("li");
-    li.innerHTML = `<strong>${m.name}</strong> – ${m.role}`;
-    membersEl.appendChild(li);
-  });
-
-  const quizzesEl = document.getElementById("quizzes");
-
-  // Proměnná pro uchování aktuálního roku, aby se zjistilo, kdy je potřeba přidat oddělovač
-  let currentYear = null;
-
-  quizzes.forEach(q => {
-    const quizDate = parseCzechDate(q.date);
-    const year = quizDate.getFullYear();
-    const date = quizDate.toLocaleDateString("cs-CZ", { year: "numeric", month: "long", day: "numeric" });
-
-    // Pokud se změní rok, přidáme oddělovač
-    if (year !== currentYear) {
-      currentYear = year;
-      const yearSeparator = document.createElement("li");
-      yearSeparator.innerHTML = `<strong>--- ${year} ---</strong>`;
-      yearSeparator.style.textAlign = "center";
-      yearSeparator.style.fontWeight = "bold";
-      yearSeparator.style.fontSize = "18px";
-      yearSeparator.style.margin = "20px 0";
-      quizzesEl.appendChild(yearSeparator);
-    }
-
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <strong>${q.pub}</strong> (${date})<br>
-      <span>Body: ${q.points} · Umístění: ${q.place}. místo</span>
-    `;
-    quizzesEl.appendChild(li);
+fetch("events.json")
+  .then(res => res.json())
+  .then(data => {
+    const el = document.getElementById("events");
+    data.forEach(e => {
+      el.innerHTML += `
+        <div class="event">
+          <h4>${e.quizName}</h4>
+          <div class="small">${e.date} · ${e.points} bodů · ${e.position}. místo</div>
+          <p>${e.description}</p>
+        </div>
+      `;
+    });
   });
 </script>
 
