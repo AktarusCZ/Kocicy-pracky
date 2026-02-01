@@ -7,6 +7,15 @@
     "description": "Skvělý kvíz o populárním seriálu."
   }, 
   {
+    "quizName": "FILMOVÉ ZNĚLKY",
+    "date": "11.11.2025",
+    "points": 0,
+    "position": 0,
+    "description": "Příliš mnoho neznámého a mnoho známého alkoholu ",
+    "photos": [
+      "https://github.com/AktarusCZ/Kocicy-pracky/blob/main/Znelky_serialu_01.jpg"
+  },
+  {
     "quizName": "PIRÁTI Z KARIBIKU",
     "date": "14.10.2025",
     "points": 0,
@@ -14,6 +23,7 @@
     "description": "Skvělá akce obohacená o hledání prokletého zlata a mnoho dalších relikvií, které zlepšovaly prožitek ze hry."
   }
 ]
+
 
 
 
