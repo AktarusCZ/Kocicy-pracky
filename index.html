@@ -188,12 +188,12 @@
   </div>
 
   <section id="tym">
-    <h3>Členové týmu</h3>
+    <h3>ČLENOVÉ TÝMU</h3>
     <ul class="members" id="members"></ul>
   </section>
 
   <section id="kvizy">
-    <h3>Účast na kvízech</h3>
+    <h3>ÚČAST NA KVÍZECH</h3>
     <ul class="quizzes" id="quizzes"></ul>
   </section>
 
@@ -218,38 +218,71 @@
 
 <script>
   const members = [
-    { name: "-", role: "Honza B." },
+    { name: "-", role: "Honza" },
     { name: "-", role: "Terka" },
     { name: "-", role: "Radek" },
     { name: "-", role: "Simča" },
     { name: "-", role: "Jirka" },
     { name: "-", role: "Barča" },
-    { name: "-", role: "Honza O." },
+    { name: "-", role: "Honza" },
     { name: "-", role: "Míša" },
     { name: "-", role: "Kačka" }
   ];
 
   const quizzes = [
     { date: "27. 1. 2026", pub: "SERIÁLOVÉ ZNĚLKY", points: 12, place: 14 },
-    { date: "20. 1. 2026", pub: "STRANGER THINGS", points: 28.5, place: 10 }
+    { date: "20. 1. 2026", pub: "STRANGER THINGS", points: 28.5, place: 10 },
+    { date: "25. 11. 2025", pub: "JAK JSEM POZNAL VAŠI MATKU", points: 0, place: 0 },
+    { date: "11. 11. 2025", pub: "FILMOVÉ ZNĚLKY", points: 0, place: 0 },
+    { date: "14. 10. 2025", pub: "PORÁTI Z KARIBIKU", points: 0, place: 0 },
   ];
+
+  // Funkce pro převod českého formátu data na Date objekt
+  function parseCzechDate(dateString) {
+    const [day, month, year] = dateString.split('.').map(part => part.trim());
+    return new Date(`${year}-${month}-${day}`);
+  }
+
+  // Seřadit kvízy podle data (nejnovější nahoře)
+  quizzes.sort((a, b) => parseCzechDate(b.date) - parseCzechDate(a.date));
 
   const membersEl = document.getElementById("members");
   members.forEach(m => {
-    membersEl.innerHTML += `<li><strong>${m.name}</strong> – ${m.role}</li>`;
+    const li = document.createElement("li");
+    li.innerHTML = `<strong>${m.name}</strong> – ${m.role}`;
+    membersEl.appendChild(li);
   });
 
   const quizzesEl = document.getElementById("quizzes");
+
+  // Proměnná pro uchování aktuálního roku, aby se zjistilo, kdy je potřeba přidat oddělovač
+  let currentYear = null;
+
   quizzes.forEach(q => {
-    quizzesEl.innerHTML += `
-      <li>
-        <strong>${q.pub}</strong> (${q.date})<br>
-        <span>Body: ${q.points} · Umístění: ${q.place}. místo</span>
-      </li>
+    const quizDate = parseCzechDate(q.date);
+    const year = quizDate.getFullYear();
+    const date = quizDate.toLocaleDateString("cs-CZ", { year: "numeric", month: "long", day: "numeric" });
+
+    // Pokud se změní rok, přidáme oddělovač
+    if (year !== currentYear) {
+      currentYear = year;
+      const yearSeparator = document.createElement("li");
+      yearSeparator.innerHTML = `<strong>--- ${year} ---</strong>`;
+      yearSeparator.style.textAlign = "center";
+      yearSeparator.style.fontWeight = "bold";
+      yearSeparator.style.fontSize = "18px";
+      yearSeparator.style.margin = "20px 0";
+      quizzesEl.appendChild(yearSeparator);
+    }
+
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <strong>${q.pub}</strong> (${date})<br>
+      <span>Body: ${q.points} · Umístění: ${q.place}. místo</span>
     `;
+    quizzesEl.appendChild(li);
   });
 </script>
 
 </body>
 </html>
-
