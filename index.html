@@ -281,7 +281,7 @@ fetch("events.json")
       if (e.photos && e.photos.length > 0) {
         eventHTML += '<div class="collage">';
         e.photos.forEach(photo => {
-          eventHTML += `<img src="${photo}" alt="Obrázek události">`;
+          eventHTML += `<img src="${photo}" alt="Obrázek události" onerror="this.style.display='none'">`;
         });
         eventHTML += '</div>';
       }
@@ -297,3 +297,4 @@ fetch("events.json")
 
 </body>
 </html>
+
