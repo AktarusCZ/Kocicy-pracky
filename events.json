@@ -12,7 +12,7 @@
     "points": 0,
     "position": 0,
     "description": "Příliš mnoho neznámého a mnoho známého alkoholu ",
-    "photos": ["https://github.com/AktarusCZ/Kocicy-pracky/blob/main/Znelky_serialu_01.jpg"]
+    "photos": ["https://raw.githubusercontent.com/AktarusCZ/Kocicy-pracky/main/obrazek.jpg"]
   },
   {
     "quizName": "PIRÁTI Z KARIBIKU",
@@ -22,6 +22,7 @@
     "description": "Skvělá akce obohacená o hledání prokletého zlata a mnoho dalších relikvií, které zlepšovaly prožitek ze hry."
   }
 ]
+
 
 
 
