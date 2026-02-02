@@ -28,10 +28,9 @@ body{
   color:var(--text);
   font-size:18px;
   line-height:1.75;
-  overflow-x:hidden;
 }
 
-/* PODPRAHOVÉ POZADÍ */
+/* MEOW BACKGROUND */
 body::before{
   content:"meow     meow     meow     meow     meow";
   position:fixed;
@@ -47,12 +46,12 @@ body::before{
   z-index:0;
 }
 
-header,main,footer{ position:relative; z-index:1; }
+header,main,footer{position:relative;z-index:1;}
 
 /* HEADER */
 header{
-  max-width:980px;
-  margin:0 auto;
+  max-width:1000px;
+  margin:auto;
   padding:60px 20px 40px;
   display:flex;
   justify-content:space-between;
@@ -67,31 +66,17 @@ header h1{
 
 nav a{
   color:var(--muted);
-  margin-left:22px;
+  margin-left:20px;
   text-decoration:none;
   font-size:14px;
-  letter-spacing:1px;
-  position:relative;
 }
 
-nav a::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-4px;
-  width:0;
-  height:1px;
-  background:var(--gold);
-  transition:width .3s ease;
-}
-
-nav a:hover::after{ width:100%; }
-nav a:hover{ color:var(--gold); }
+nav a:hover{color:var(--gold);}
 
 /* MAIN */
 main{
-  max-width:880px;
-  margin:0 auto;
+  max-width:900px;
+  margin:auto;
   padding:20px;
 }
 
@@ -112,20 +97,12 @@ main{
   color:var(--gold);
   font-weight:800;
   margin:25px 0 35px;
-  line-height:1.15;
-  animation:fadeUp .9s ease forwards;
 }
 
 .hero p{
   max-width:620px;
-  margin:0 auto;
+  margin:auto;
   color:var(--muted);
-  animation:fadeUp 1.2s ease forwards;
-}
-
-@keyframes fadeUp{
-  from{ opacity:0; transform:translateY(20px); }
-  to{ opacity:1; transform:translateY(0); }
 }
 
 /* SECTIONS */
@@ -134,17 +111,13 @@ section{
   border-radius:18px;
   padding:50px 40px;
   margin-bottom:80px;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.03),
-    0 30px 70px rgba(0,0,0,0.5);
 }
 
 section h3{
   text-align:center;
   color:var(--gold);
   letter-spacing:3px;
-  font-size:20px;
-  margin-bottom:45px;
+  margin-bottom:40px;
 }
 
 .small{
@@ -160,43 +133,44 @@ section h3{
   border-bottom:1px solid #2a2a2a;
 }
 
-.event:last-child{
-  border-bottom:none;
-  margin-bottom:0;
-  padding-bottom:0;
-}
+.event:last-child{border-bottom:none;}
 
 .event h4{
   color:var(--gold);
   font-size:22px;
-  margin-bottom:6px;
+}
+
+/* EVENT PHOTOS */
+.event-photos{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:14px;
+  margin-top:18px;
+}
+
+.event-photos img{
+  width:100%;
+  border-radius:12px;
 }
 
 /* TEAM */
 .team-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:24px;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
 }
 
 .member{
-  background:rgba(255,255,255,0.02);
+  background:#202020;
   border-radius:14px;
-  padding:26px 20px;
+  padding:20px;
   text-align:center;
-  transition:transform .25s ease, box-shadow .25s ease;
-}
-
-.member:hover{
-  transform:translateY(-4px);
-  box-shadow:0 18px 40px rgba(0,0,0,0.4);
 }
 
 .member strong{
   display:block;
   color:var(--gold);
-  letter-spacing:1px;
-  margin-bottom:8px;
+  margin-bottom:6px;
 }
 
 .member span{
@@ -204,50 +178,38 @@ section h3{
   font-style:italic;
 }
 
-.icon{ margin-left:6px; opacity:.85; }
-
 /* QUIZZES */
-.quiz-year{ margin-bottom:45px; }
+.quiz-year{margin-bottom:45px;}
 
 .year-header{
   display:flex;
   justify-content:space-between;
-  align-items:baseline;
   border-bottom:1px solid #2a2a2a;
-  margin-bottom:20px;
-  padding-bottom:8px;
+  margin-bottom:15px;
 }
 
 .year{
-  font-size:28px;
+  font-size:26px;
   font-weight:800;
   color:var(--gold);
 }
 
-.year-points{
-  font-size:14px;
-  color:var(--muted);
-}
-
-ul{ list-style:none; padding:0; margin:0; }
+ul{list-style:none;padding:0;margin:0;}
 
 li{
-  padding:14px 0;
+  padding:12px 0;
   border-bottom:1px dashed #2a2a2a;
 }
 
-li:last-child{ border-bottom:none; }
+li:last-child{border-bottom:none;}
 
-/* LIGA – MODERN */
+/* LIGA */
 .liga{
-  position:relative;
-  overflow:hidden;
+  text-align:center;
   background:
     radial-gradient(circle at top, rgba(211,163,74,0.18), transparent 60%),
     linear-gradient(180deg,#1c1c1c,#111);
 }
-
-.liga p{ text-align:center; }
 
 .liga-buttons{
   display:flex;
@@ -257,13 +219,10 @@ li:last-child{ border-bottom:none; }
 
 .liga-btn{
   flex:1;
-  text-align:center;
   padding:18px 0;
   border-radius:60px;
   font-weight:700;
-  letter-spacing:1px;
   text-decoration:none;
-  transition:all .35s ease;
 }
 
 .liga-btn.primary{
@@ -271,28 +230,17 @@ li:last-child{ border-bottom:none; }
   color:#111;
 }
 
-.liga-btn.primary:hover{
-  transform:translateY(-3px);
-  box-shadow:0 18px 40px rgba(211,163,74,0.45);
-}
-
 .liga-btn.secondary{
   border:1px solid var(--gold);
   color:var(--gold);
-}
-
-.liga-btn.secondary:hover{
-  background:var(--gold);
-  color:#111;
-  transform:translateY(-3px);
 }
 
 /* FOOTER */
 footer{
   text-align:center;
   color:var(--muted);
+  padding:60px 20px;
   font-size:14px;
-  padding:70px 20px 90px;
 }
 </style>
 </head>
@@ -325,15 +273,15 @@ footer{
 <section id="tym">
   <h3>ČLENOVÉ TÝMU</h3>
   <div class="team-grid">
-    <div class="member"><strong>–</strong><span>Honza <span class="icon">🐱</span></span></div>
-    <div class="member"><strong>Šedá eminence</strong><span>Terka <span class="icon">🧠</span></span></div>
-    <div class="member"><strong>pLišák</strong><span>Radek <span class="icon">🦊</span></span></div>
-    <div class="member"><strong>Královna špatného odhadu</strong><span>Simča <span class="icon">👑</span></span></div>
-    <div class="member"><strong>–</strong><span>Jirka <span class="icon">⭐</span></span></div>
-    <div class="member"><strong>–</strong><span>Barča <span class="icon">📸</span></span></div>
-    <div class="member"><strong>–</strong><span>Honza <span class="icon">🐾</span></span></div>
-    <div class="member"><strong>–</strong><span>Míša <span class="icon">🐾</span></span></div>
-    <div class="member"><strong>–</strong><span>Kačka <span class="icon">🐾</span></span></div>
+    <div class="member"><strong>–</strong><span>Honza 🐱</span></div>
+    <div class="member"><strong>Šedá eminence</strong><span>Terka 🧠</span></div>
+    <div class="member"><strong>pLišák</strong><span>Radek 🦊</span></div>
+    <div class="member"><strong>Královna špatného odhadu</strong><span>Simča 👑</span></div>
+    <div class="member"><strong>–</strong><span>Jirka ⭐</span></div>
+    <div class="member"><strong>–</strong><span>Barča 📸</span></div>
+    <div class="member"><strong>–</strong><span>Honza 🐾</span></div>
+    <div class="member"><strong>–</strong><span>Míša 🐾</span></div>
+    <div class="member"><strong>–</strong><span>Kačka 🐾</span></div>
   </div>
 </section>
 
@@ -343,13 +291,12 @@ footer{
 
 <section id="liga" class="liga">
   <h3>LIGA</h3>
-  <p class="small">Výsledky, tabulka a dění kolem ligy</p>
   <div class="liga-buttons">
     <a class="liga-btn primary" href="https://keepthescore.com/board/wwwnwphxgxpzr/" target="_blank">
       📊 TABULKA LIGY
     </a>
     <a class="liga-btn secondary" href="https://www.facebook.com/groups/6397879963658087" target="_blank">
-      💬 DISKUZE NA FACEBOOKU
+      💬 FACEBOOK SKUPINA
     </a>
   </div>
 </section>
@@ -369,16 +316,23 @@ function parseCZDate(str){
 
 /* EVENTS */
 fetch("events.json")
-  .then(res=>res.json())
+  .then(r=>r.json())
   .then(data=>{
     data.sort((a,b)=>parseCZDate(b.date)-parseCZDate(a.date));
     const el=document.getElementById("events");
     data.forEach(e=>{
+      let photos="";
+      if(e.photos && e.photos.length){
+        photos='<div class="event-photos">';
+        e.photos.forEach(p=>photos+=`<img src="${p}" loading="lazy">`);
+        photos+='</div>';
+      }
       el.innerHTML+=`
         <div class="event">
           <h4>${e.quizName}</h4>
           <div class="small">${e.date} · ${e.points} bodů · ${e.position}. místo</div>
           <p>${e.description}</p>
+          ${photos}
         </div>
       `;
     });
@@ -398,7 +352,7 @@ quizzes.sort((a,b)=>parseCZDate(b.date)-parseCZDate(a.date));
 const byYear={};
 quizzes.forEach(q=>{
   const y=parseCZDate(q.date).getFullYear();
-  if(!byYear[y]) byYear[y]=[];
+  if(!byYear[y])byYear[y]=[];
   byYear[y].push(q);
 });
 
@@ -410,7 +364,7 @@ Object.keys(byYear).sort((a,b)=>b-a).forEach(year=>{
     <div class="quiz-year">
       <div class="year-header">
         <span class="year">${year}</span>
-        <span class="year-points">Celkem ${total} bodů</span>
+        <span class="small">Celkem ${total} bodů</span>
       </div>
       <ul>
   `;
