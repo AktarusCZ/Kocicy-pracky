@@ -5,16 +5,13 @@
     "points": 28.5,
     "position": 10,
     "description": "Skvělý kvíz o populárním seriálu."
-    "photos": [
-    ""
-  ]
-  }, 
+  },
   {
     "quizName": "FILMOVÉ ZNĚLKY",
     "date": "11.11.2025",
     "points": 0,
     "position": 0,
-    "description": "Příliš mnoho neznámého a mnoho známého alkoholu ",
+    "description": "Příliš mnoho neznámého a mnoho známého alkoholu",
     "photos": [
       "https://raw.githubusercontent.com/AktarusCZ/Kocicy-pracky/main/01.jpg"
     ]
@@ -25,19 +22,5 @@
     "points": 0,
     "position": 0,
     "description": "Skvělá akce obohacená o hledání prokletého zlata a mnoho dalších relikvií, které zlepšovaly prožitek ze hry."
-        "photos": [
-    ""
-  ]
   }
 ]
-
-
-
-
-
-
-
-
-
-
-
