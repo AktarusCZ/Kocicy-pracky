@@ -303,7 +303,7 @@ footer{
   cursor:pointer;
 }
 
- /* =========================
+/* =========================
    📱 MOBILNÍ OPTIMALIZACE
    ========================= */
 
@@ -386,8 +386,19 @@ footer{
   footer{
     padding:40px 15px;
   }
+    .activity{
+    margin-top:8px;
+    font-size:14px;
+    color:var(--muted);
+    opacity:.9;
+  }
+
+  .activity .medal{
+    margin-left:6px;
+    font-size:15px;
+  }
 }
- 
+
 </style>
 </head>
 
@@ -427,16 +438,56 @@ footer{
     <section id="tym">
       <h3>ČLENOVÉ TÝMU</h3>
       <div class="team-grid">
-        <div class="member"><strong>–</strong><span>Honza 🐱</span></div>
-        <div class="member"><strong>Šedá eminence</strong><span>Terka 🧠</span></div>
-        <div class="member"><strong>pLišák</strong><span>Radek 🦊</span></div>
-        <div class="member"><strong>Královna špatného odhadu</strong><span>Simča 👑</span></div>
-        <div class="member"><strong>–</strong><span>Jirka ⭐</span></div>
-        <div class="member"><strong>–</strong><span>Barča 📸</span></div>
-        <div class="member"><strong>–</strong><span>Honza 🐾</span></div>
-        <div class="member"><strong>–</strong><span>Míša 🐾</span></div>
-        <div class="member"><strong>–</strong><span>Kačka 🐾</span></div>
-      </div>
+        <div class="member" data-member="Terka">
+            <strong>Šedá eminence</strong>
+            <span>Terka 🧠</span>
+            <div class="activity"></div>
+        </div>
+        <div class="member" data-member="Honza">
+            <strong>-</strong>
+            <span>Honza B. 🐱</span>
+            <div class="activity"></div>
+        </div>
+        <div class="member" data-member="Radek">
+            <strong>pLišák</strong>
+            <span>Radek 🦊</span>
+            <div class="activity"></div>
+        </div>
+        <div class="member" data-member="Simca">
+            <strong>Královna špatného odhadu</strong>
+            <span>Simča 👑</span>
+            <div class="activity"></div>
+        </div>
+        <div class="member" data-member="Jirka">
+            <strong>-</strong>
+            <span>Jirka ⭐</span>
+            <div class="activity"></div>
+        </div> 
+        <div class="member" data-member="Barca">
+            <strong>-</strong>
+            <span>Barča 📸</span>
+            <div class="activity"></div>
+        </div>
+        <div class="member" data-member="HonzaO">
+            <strong>-</strong>
+            <span>Honza O. 🐾</span>
+            <div class="activity"></div>
+        </div>
+        <div class="member" data-member="Misa">
+            <strong>-</strong>
+            <span>Míša 🐾</span>
+            <div class="activity"></div>
+        </div>
+        <div class="member" data-member="Kacka">
+            <strong>-</strong>
+            <span>Kačka 🐾</span>
+            <div class="activity"></div>
+        </div>
+        <div class="member" data-member="Michal">
+            <strong>-</strong>
+            <span>Michal 🐾</span>
+            <div class="activity"></div>
+        </div>        
     </section>
 
     <section id="kvizy">
@@ -505,12 +556,43 @@ fetch("events.json")
 
 /* QUIZZES */
 const quizzes=[
-  {name:"SERIÁLOVÉ ZNĚLKY",date:"27. 1. 2026",points:12,position:14},
-  {name:"STRANGER THINGS",date:"20. 1. 2026",points:28.5,position:10},
-  {name:"JAK JSEM POZNAL VAŠI MATKU",date:"25. 11. 2025",points:0,position:0},
-  {name:"FILMOVÉ ZNĚLKY",date:"11. 11. 2025",points:0,position:0},
-  {name:"PIRÁTI Z KARIBIKU",date:"14. 10. 2025",points:0,position:0}
+  {
+    name:"SERIÁLOVÉ ZNĚLKY",
+    date:"27. 1. 2026",
+    points:12,
+    position:14,
+    members:["Terka","Radek","Honza"]
+  },
+  {
+    name:"STRANGER THINGS",
+    date:"20. 1. 2026",
+    points:28.5,
+    position:10,
+    members:["Honza","Michal","Simca","Terka","Radek"]
+  },
+  {
+    name:"JAK JSEM POZNAL VAŠI MATKU",
+    date:"25. 11. 2025",
+    points:0,
+    position:0,
+    members:["Terka","Barca","Radek","Simca","Honza"]
+  },
+  {
+    name:"FILMOVÉ ZNĚLKY",
+    date:"11. 11. 2025",
+    points:0,
+    position:0,
+    members:["Honza","Simca","HonzaO","Jirka","Terka"]
+  },
+  {
+    name:"PIRÁTI Z KARIBIKU",
+    date:"14. 10. 2025",
+    points:0,
+    position:0,
+    members:["Terka","Radek","Honza","Simca","Misa","Kacka","Barca"]
+  }
 ];
+
 
 quizzes.sort((a,b)=>parseCZDate(b.date)-parseCZDate(a.date));
 const byYear={};
@@ -563,8 +645,43 @@ document.addEventListener("keydown",e=>{
     lightboxImg.src="";
   }
 });
+
+/* ===============================
+   TEAM ACTIVITY FROM QUIZZES
+   =============================== */
+
+const activityCount = {};
+
+// 1️⃣ SPOČÍTAT ÚČASTI
+quizzes.forEach(q=>{
+  if(!q.members) return;
+  q.members.forEach(name=>{
+    activityCount[name]=(activityCount[name]||0)+1;
+  });
+});
+
+// 2️⃣ SEŘADIT PODLE POČTU
+const ranking = Object.entries(activityCount)
+  .sort((a,b)=>b[1]-a[1]);
+
+// 3️⃣ TOP 3 MEDAILE
+const medals = {};
+ranking.slice(0,3).forEach((r,i)=>{
+  medals[r[0]]=["🥇","🥈","🥉"][i];
+});
+
+// 4️⃣ VYPSAT DO KARET TÝMU
+document.querySelectorAll(".member").forEach(card=>{
+  const name = card.dataset.member;
+  const count = activityCount[name] || 0;
+  const medal = medals[name] ? `<span class="medal">${medals[name]}</span>` : "";
+
+  const el = card.querySelector(".activity");
+  if(el){
+    el.innerHTML = `${count}${medal}`;
+  }
+});
 </script>
 
 </body>
 </html>
-
