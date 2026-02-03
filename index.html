@@ -30,48 +30,98 @@ body{
   line-height:1.75;
 }
 
-/* MEOW BACKGROUND */
-body::before{
-  content:"meow     meow     meow     meow     meow";
+/* RANDOM MEOW BACKGROUND */
+.meow-layer{
   position:fixed;
   inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:110px;
-  letter-spacing:80px;
-  color:rgba(255,255,255,0.03);
-  transform:rotate(-10deg);
   pointer-events:none;
   z-index:0;
+  opacity:.05;
+  font-size:90px;
+  letter-spacing:60px;
+  transform:rotate(-12deg);
+  display:flex;
+  flex-wrap:wrap;
+  align-content:flex-start;
+}
+.meow-layer span{
+  white-space:nowrap;
+  margin:40px;
+}
+
+/* PAGE WRAPPER */
+.page{
+  position:relative;
+  overflow:hidden;
 }
 
 header,main,footer{position:relative;z-index:1;}
 
-/* HEADER */
+/* HEADER – NIŽŠÍ VÝŠKA */
 header{
   max-width:1000px;
   margin:auto;
-  padding:60px 20px 40px;
+  padding:25px 20px 20px; /* ↓ zúžená výška */
   display:flex;
   justify-content:space-between;
-  align-items:flex-end;
+  align-items:center;
 }
 
-header h1{
-  font-size:26px;
-  letter-spacing:3px;
-  font-weight:800;
+/* LOGO – STÁLE VELKÉ */
+header img{
+  height: 140px;
+  transition:transform .6s ease, filter .6s ease;
+}
+header img:hover{
+  transform:scale(1.05);
+  filter:drop-shadow(0 0 16px rgba(211,163,74,0.5));
 }
 
 nav a{
   color:var(--muted);
-  margin-left:20px;
+  margin-left:18px;
+  padding:6px 14px;
   text-decoration:none;
   font-size:14px;
+  border:1px solid rgba(211,163,74,0.35);
+  border-radius:20px;
+  transition:.25s;
+}
+nav a:hover{
+  background:var(--gold);
+  color:#111;
 }
 
-nav a:hover{color:var(--gold);}
+/* ASIDE LINES – POD HEADEREM */
+.aside{
+  position:absolute;
+  top:190px;              /* výška headeru + divider */
+  bottom:0;
+  width:2px;
+  background:var(--gold);
+  opacity:.35;
+  pointer-events:none;
+}
+
+.aside.left{ left:calc(50% - 520px); }
+.aside.right{ right:calc(50% - 520px); }
+
+/* DIVIDER */
+.divider{
+  height:50px;
+  background:linear-gradient(to bottom, rgba(14,14,17,1), rgba(14,14,17,0));
+  position:relative;
+}
+.divider::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:10px;
+  width:120px;
+  height:2px;
+  background:var(--gold);
+  transform:translateX(-50%);
+}
 
 /* MAIN */
 main{
@@ -84,21 +134,19 @@ main{
 .hero{
   text-align:center;
   padding:40px 20px 90px;
+  animation:fadeUp .9s ease both;
 }
-
 .hero .tag{
   color:var(--muted);
   font-size:14px;
   font-style:italic;
 }
-
 .hero h2{
   font-size:clamp(36px,5vw,60px);
   color:var(--gold);
   font-weight:800;
   margin:25px 0 35px;
 }
-
 .hero p{
   max-width:620px;
   margin:auto;
@@ -111,6 +159,7 @@ section{
   border-radius:18px;
   padding:50px 40px;
   margin-bottom:80px;
+  animation:fadeUp .9s ease both;
 }
 
 section h3{
@@ -120,43 +169,37 @@ section h3{
   margin-bottom:40px;
 }
 
-.small{
-  font-size:14px;
-  font-style:italic;
-  color:var(--muted);
-}
+.small{font-size:14px;font-style:italic;color:var(--muted);}
 
 /* EVENTS */
 .event{
   margin-bottom:45px;
   padding-bottom:35px;
   border-bottom:1px solid #2a2a2a;
+  transition:.3s;
 }
-
+.event:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.35);
+}
 .event:last-child{border-bottom:none;}
+.event h4{color:var(--gold);font-size:22px;}
 
-.event h4{
-  color:var(--gold);
-  font-size:22px;
-}
-
-/* EVENT PHOTOS */
 .event-photos{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px, 0.5fr));
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
   gap:14px;
-  margin-top:18px;
+  margin:18px auto 0;
   max-width:70%;
 }
-
- .event-photos{
-  margin-left:auto;
-  margin-right:auto;
-} 
-  
 .event-photos img{
   width:100%;
   border-radius:12px;
+  cursor:pointer;
+  transition:transform .3s ease;
+}
+.event-photos img:hover{
+  transform:scale(1.05);
 }
 
 /* TEAM */
@@ -165,48 +208,38 @@ section h3{
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:20px;
 }
-
 .member{
   background:#202020;
   border-radius:14px;
   padding:20px;
   text-align:center;
+  transition:.3s;
 }
-
-.member strong{
-  display:block;
-  color:var(--gold);
-  margin-bottom:6px;
+.member:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.35);
 }
-
-.member span{
-  color:var(--muted);
-  font-style:italic;
-}
+.member strong{display:block;color:var(--gold);margin-bottom:6px;}
+.member span{color:var(--muted);font-style:italic;}
 
 /* QUIZZES */
 .quiz-year{margin-bottom:45px;}
-
 .year-header{
   display:flex;
   justify-content:space-between;
   border-bottom:1px solid #2a2a2a;
   margin-bottom:15px;
 }
-
 .year{
   font-size:26px;
   font-weight:800;
   color:var(--gold);
 }
-
 ul{list-style:none;padding:0;margin:0;}
-
 li{
   padding:12px 0;
   border-bottom:1px dashed #2a2a2a;
 }
-
 li:last-child{border-bottom:none;}
 
 /* LIGA */
@@ -216,13 +249,11 @@ li:last-child{border-bottom:none;}
     radial-gradient(circle at top, rgba(211,163,74,0.18), transparent 60%),
     linear-gradient(180deg,#1c1c1c,#111);
 }
-
 .liga-buttons{
   display:flex;
   gap:30px;
   margin-top:40px;
 }
-
 .liga-btn{
   flex:1;
   padding:18px 0;
@@ -230,16 +261,8 @@ li:last-child{border-bottom:none;}
   font-weight:700;
   text-decoration:none;
 }
-
-.liga-btn.primary{
-  background:var(--gold);
-  color:#111;
-}
-
-.liga-btn.secondary{
-  border:1px solid var(--gold);
-  color:var(--gold);
-}
+.liga-btn.primary{background:var(--gold);color:#111;}
+.liga-btn.secondary{border:1px solid var(--gold);color:var(--gold);}
 
 /* FOOTER */
 footer{
@@ -248,73 +271,123 @@ footer{
   padding:60px 20px;
   font-size:14px;
 }
+
+/* ANIMACE */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(25px);}
+  to{opacity:1;transform:none;}
+}
+
+/* LIGHTBOX */
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:9999;
+}
+.lightbox.active{
+  opacity:1;
+  pointer-events:auto;
+}
+.lightbox img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:16px;
+  box-shadow:0 0 40px rgba(211,163,74,.35);
+  cursor:pointer;
+}
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>KOČIČÍ PRACKY</h1>
-  <nav>
-    <a href="#udalosti">UDÁLOSTI</a>
-    <a href="#tym">TÝM</a>
-    <a href="#kvizy">KVÍZY</a>
-    <a href="#liga">LIGA</a>
-  </nav>
-</header>
+<div class="meow-layer" id="meowLayer"></div>
 
-<main>
+<div class="page">
+  <div class="aside left"></div>
+  <div class="aside right"></div>
 
-<div class="hero">
-  <div class="tag">Hospodsko-kvízový tým</div>
-  <h2>Mňau.<br>Víme to.<br>Když ne, tipujeme s grácií.</h2>
-  <p>Pamatujeme si zbytečné věci, hádáme se u piva a občas skončíme nečekaně vysoko.</p>
+  <header>
+    <img src="logo2.png" alt="Kočičí pracky logo">
+    <nav>
+      <a href="#udalosti">UDÁLOSTI</a>
+      <a href="#tym">TÝM</a>
+      <a href="#kvizy">KVÍZY</a>
+      <a href="#liga">LIGA</a>
+    </nav>
+  </header>
+
+  <div class="divider"></div>
+
+  <main>
+
+    <div class="hero">
+      <div class="tag">Hospodsko-kvízový tým</div>
+      <h2>Mňau.<br>Víme to.<br>Když ne, tipujeme s grácií.</h2>
+      <p>Pamatujeme si zbytečné věci, hádáme se u piva a občas skončíme nečekaně vysoko.</p>
+    </div>
+
+    <section id="udalosti">
+      <h3>UDÁLOSTI</h3>
+      <div id="events"></div>
+    </section>
+
+    <section id="tym">
+      <h3>ČLENOVÉ TÝMU</h3>
+      <div class="team-grid">
+        <div class="member"><strong>–</strong><span>Honza 🐱</span></div>
+        <div class="member"><strong>Šedá eminence</strong><span>Terka 🧠</span></div>
+        <div class="member"><strong>pLišák</strong><span>Radek 🦊</span></div>
+        <div class="member"><strong>Královna špatného odhadu</strong><span>Simča 👑</span></div>
+        <div class="member"><strong>–</strong><span>Jirka ⭐</span></div>
+        <div class="member"><strong>–</strong><span>Barča 📸</span></div>
+        <div class="member"><strong>–</strong><span>Honza 🐾</span></div>
+        <div class="member"><strong>–</strong><span>Míša 🐾</span></div>
+        <div class="member"><strong>–</strong><span>Kačka 🐾</span></div>
+      </div>
+    </section>
+
+    <section id="kvizy">
+      <h3>KVÍZY</h3>
+      <div id="quizList"></div>
+    </section>
+
+    <section id="liga" class="liga">
+      <h3>LIGA</h3>
+      <div class="liga-buttons">
+        <a class="liga-btn primary" href="https://keepthescore.com/board/wwwnwphxgxpzr/" target="_blank">📊 TABULKA</a>
+        <a class="liga-btn secondary" href="https://www.facebook.com/groups/6397879963658087" target="_blank">💬 FACEBOOK</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © Družstvo kočičí pracky<br>
+    Vzniklo z nudy. Zůstalo kvůli pivu.
+  </footer>
+
 </div>
 
-<section id="udalosti">
-  <h3>UDÁLOSTI</h3>
-  <div id="events"></div>
-</section>
-
-<section id="tym">
-  <h3>ČLENOVÉ TÝMU</h3>
-  <div class="team-grid">
-    <div class="member"><strong>–</strong><span>Honza 🐱</span></div>
-    <div class="member"><strong>Šedá eminence</strong><span>Terka 🧠</span></div>
-    <div class="member"><strong>pLišák</strong><span>Radek 🦊</span></div>
-    <div class="member"><strong>Královna špatného odhadu</strong><span>Simča 👑</span></div>
-    <div class="member"><strong>–</strong><span>Jirka ⭐</span></div>
-    <div class="member"><strong>–</strong><span>Barča 📸</span></div>
-    <div class="member"><strong>–</strong><span>Honza 🐾</span></div>
-    <div class="member"><strong>–</strong><span>Míša 🐾</span></div>
-    <div class="member"><strong>–</strong><span>Kačka 🐾</span></div>
-  </div>
-</section>
-
-<section id="kvizy">
-  <h3>KVÍZY</h3>
-</section>
-
-<section id="liga" class="liga">
-  <h3>LIGA</h3>
-  <div class="liga-buttons">
-    <a class="liga-btn primary" href="https://keepthescore.com/board/wwwnwphxgxpzr/" target="_blank">
-      📊 TABULKA LIGY
-    </a>
-    <a class="liga-btn secondary" href="https://www.facebook.com/groups/6397879963658087" target="_blank">
-      💬 FACEBOOK SKUPINA
-    </a>
-  </div>
-</section>
-
-</main>
-
-<footer>
-  © Družstvo kočičí pracky<br>
-  Vzniklo z nudy. Zůstalo kvůli pivu.
-</footer>
+<div class="lightbox" id="lightbox"><img src=""></div>
 
 <script>
+/* RANDOM MEOW */
+const meows=["meow","MEOW!","Meow!"];
+const layer=document.getElementById("meowLayer");
+for(let i=0;i<45;i++){
+  const s=document.createElement("span");
+  s.textContent=meows[Math.floor(Math.random()*meows.length)];
+  layer.appendChild(s);
+}
+
+/* DATE PARSER */
 function parseCZDate(str){
   const p=str.replace(/\s+/g,'').split('.');
   return new Date(p[2],p[1]-1,p[0]);
@@ -322,27 +395,27 @@ function parseCZDate(str){
 
 /* EVENTS */
 fetch("events.json")
-  .then(r=>r.json())
-  .then(data=>{
-    data.sort((a,b)=>parseCZDate(b.date)-parseCZDate(a.date));
-    const el=document.getElementById("events");
-    data.forEach(e=>{
-      let photos="";
-      if(e.photos && e.photos.length){
-        photos='<div class="event-photos">';
-        e.photos.forEach(p=>photos+=`<img src="${p}" loading="lazy">`);
-        photos+='</div>';
-      }
-      el.innerHTML+=`
-        <div class="event">
-          <h4>${e.quizName}</h4>
-          <div class="small">${e.date} · ${e.points} bodů · ${e.position}. místo</div>
-          <p>${e.description}</p>
-          ${photos}
-        </div>
-      `;
-    });
+.then(r=>r.json())
+.then(data=>{
+  data.sort((a,b)=>parseCZDate(b.date)-parseCZDate(a.date));
+  const el=document.getElementById("events");
+  data.forEach(e=>{
+    let photos="";
+    if(e.photos&&e.photos.length){
+      photos='<div class="event-photos">';
+      e.photos.forEach(p=>photos+=`<img src="${p}" loading="lazy">`);
+      photos+='</div>';
+    }
+    el.innerHTML+=`
+      <div class="event">
+        <h4>${e.quizName}</h4>
+        <div class="small">${e.date} · ${e.points} bodů · ${e.position}. místo</div>
+        <p>${e.description}</p>
+        ${photos}
+      </div>
+    `;
   });
+});
 
 /* QUIZZES */
 const quizzes=[
@@ -354,7 +427,6 @@ const quizzes=[
 ];
 
 quizzes.sort((a,b)=>parseCZDate(b.date)-parseCZDate(a.date));
-
 const byYear={};
 quizzes.forEach(q=>{
   const y=parseCZDate(q.date).getFullYear();
@@ -362,8 +434,7 @@ quizzes.forEach(q=>{
   byYear[y].push(q);
 });
 
-const qEl=document.getElementById("kvizy");
-
+const qEl=document.getElementById("quizList");
 Object.keys(byYear).sort((a,b)=>b-a).forEach(year=>{
   const total=byYear[year].reduce((s,q)=>s+q.points,0);
   let html=`
@@ -385,8 +456,28 @@ Object.keys(byYear).sort((a,b)=>b-a).forEach(year=>{
   html+='</ul></div>';
   qEl.innerHTML+=html;
 });
+
+/* LIGHTBOX */
+const lightbox=document.getElementById("lightbox");
+const lightboxImg=lightbox.querySelector("img");
+
+document.addEventListener("click",e=>{
+  if(e.target.matches(".event-photos img")){
+    lightboxImg.src=e.target.src;
+    lightbox.classList.add("active");
+  }
+});
+lightbox.addEventListener("click",()=>{
+  lightbox.classList.remove("active");
+  lightboxImg.src="";
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){
+    lightbox.classList.remove("active");
+    lightboxImg.src="";
+  }
+});
 </script>
 
 </body>
 </html>
-
