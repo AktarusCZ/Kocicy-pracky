@@ -242,6 +242,13 @@ li{
 }
 li:last-child{border-bottom:none;}
 
+.quiz-members{
+  margin-top:6px;
+  font-size:14px;
+  color:var(--muted);
+  font-style:italic;
+}
+
 /* LIGA */
 .liga{
   text-align:center;
@@ -574,8 +581,8 @@ const quizzes=[
     name:"JAK JSEM POZNAL VAŠI MATKU",
     date:"25. 11. 2025",
     points:0,
-    position:0,
-    members:["Terka","Barca","Radek","Simca","Honza"]
+    position:4,
+    members:["Terka","Barca","Radek","Honza"]
   },
   {
     name:"FILMOVÉ ZNĚLKY",
@@ -604,8 +611,10 @@ quizzes.forEach(q=>{
 
 const qEl=document.getElementById("quizList");
 Object.keys(byYear).sort((a,b)=>b-a).forEach(year=>{
-  const total=byYear[year].reduce((s,q)=>s+q.points,0);
-  let html=`
+
+  const total = byYear[year].reduce((s,q)=>s+q.points,0);
+
+  let html = `
     <div class="quiz-year">
       <div class="year-header">
         <span class="year">${year}</span>
@@ -613,16 +622,28 @@ Object.keys(byYear).sort((a,b)=>b-a).forEach(year=>{
       </div>
       <ul>
   `;
+
   byYear[year].forEach(q=>{
-    html+=`
+
+    const membersLine = Array.isArray(q.members) && q.members.length
+      ? `<div class="quiz-members">${q.members.join(" | ")}</div>`
+      : `<div class="quiz-members">—</div>`;
+
+    html += `
       <li>
         <strong>${q.name}</strong><br>
         <span class="small">${q.date} · ${q.points} bodů · ${q.position}. místo</span>
+        ${membersLine}
       </li>
     `;
   });
-  html+='</ul></div>';
-  qEl.innerHTML+=html;
+
+  html += `
+      </ul>
+    </div>
+  `;
+
+  qEl.innerHTML += html;
 });
 
 /* LIGHTBOX */
