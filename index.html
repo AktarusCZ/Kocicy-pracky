@@ -302,6 +302,92 @@ footer{
   box-shadow:0 0 40px rgba(211,163,74,.35);
   cursor:pointer;
 }
+
+ /* =========================
+   📱 MOBILNÍ OPTIMALIZACE
+   ========================= */
+
+@media (max-width: 768px){
+
+  /* HEADER */
+  header{
+    flex-direction:column;
+    gap:15px;
+    padding:20px 15px 15px;
+  }
+
+  header img{
+    height:90px; /* menší logo na mobilu */
+  }
+
+  nav{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+  }
+
+  nav a{
+    margin:0;
+    font-size:13px;
+    padding:5px 12px;
+  }
+
+  /* ASIDE – VYPNOUT */
+  .aside{
+    display:none;
+  }
+
+  /* MEOW POZADÍ – JEMNĚJŠÍ */
+  .meow-layer{
+    opacity:0.025;
+    font-size:60px;
+    letter-spacing:40px;
+  }
+
+  /* HERO */
+  .hero{
+    padding:30px 10px 60px;
+  }
+
+  .hero h2{
+    font-size:clamp(28px, 8vw, 42px);
+    line-height:1.2;
+  }
+
+  /* SECTIONS */
+  section{
+    padding:30px 20px;
+    margin-bottom:50px;
+  }
+
+  section h3{
+    font-size:18px;
+    margin-bottom:25px;
+  }
+
+  /* EVENTS – FOTKY NA PLNOU ŠÍŘKU */
+  .event-photos{
+    max-width:100%;
+  }
+
+  /* TEAM */
+  .team-grid{
+    grid-template-columns:1fr;
+  }
+
+  /* LIGA TLAČÍTKA POD SEBE */
+  .liga-buttons{
+    flex-direction:column;
+    gap:15px;
+  }
+
+  /* FOOTER */
+  footer{
+    padding:40px 15px;
+  }
+}
+ 
 </style>
 </head>
 
@@ -481,3 +567,4 @@ document.addEventListener("keydown",e=>{
 
 </body>
 </html>
+
