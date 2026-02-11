@@ -1,4 +1,14 @@
 [
+    {
+    "quizName": "PÁN PRSTENŮ",
+    "date": "10. 2. 2026",
+    "points": 23,
+    "position": 18,
+    "description": "Skvělý kvíz o populárním seriálu."
+    "photos": [
+      "https://raw.githubusercontent.com/AktarusCZ/Kocicy-pracky/main/02.jpg"
+    ]
+  },
   {
     "quizName": "STRANGER THINGS",
     "date": "20. 1. 2026",
@@ -24,3 +34,4 @@
     "description": "Skvělá akce obohacená o hledání prokletého zlata a mnoho dalších relikvií, které zlepšovaly prožitek ze hry."
   }
 ]
+
