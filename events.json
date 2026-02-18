@@ -1,5 +1,15 @@
 [
   {
+    "quizName": "POZNEJ MÍSTO",
+    "date": "17.2.2026",
+    "points": 31,
+    "position": 4,
+    "description": "Zábavný, vzdělávací kvíz, během kterého jsem procestovali skoro celý svět a pořádně zavařili naše mozkové závity",
+    "photos": [
+      "https://raw.githubusercontent.com/AktarusCZ/Kocicy-pracky/main/03.jpg"
+    ]
+  },
+  {
     "quizName": "PÁN PRSTENŮ",
     "date": "10.2.2026",
     "points": 23,
@@ -34,6 +44,7 @@
     "description": "Skvělá akce obohacená o hledání prokletého zlata a mnoho dalších relikvií, které zlepšovaly prožitek ze hry."
   }
 ]
+
 
 
 
