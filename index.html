@@ -841,10 +841,33 @@ document.querySelectorAll(".member").forEach(card=>{
     el.innerHTML = `${count}${medal}`;
   }
 });
+  /* =========================
+   GAME MODAL LOGIC
+   ========================= */
+
+const gamesModal = document.getElementById("gamesModal");
+const openGames = document.getElementById("openGames");
+const closeGames = document.getElementById("closeGames");
+
+openGames.addEventListener("click", e=>{
+  e.preventDefault();
+  gamesModal.classList.add("active");
+});
+
+closeGames.addEventListener("click", ()=>{
+  gamesModal.classList.remove("active");
+});
+
+gamesModal.addEventListener("click", e=>{
+  if(e.target === gamesModal){
+    gamesModal.classList.remove("active");
+  }
+});
 </script>
 
 </body>
 </html>
+
 
 
 
