@@ -404,6 +404,94 @@ footer{
     margin-left:6px;
     font-size:15px;
   }
+  /* =========================
+   🎮 GAME MODAL
+   ========================= */
+
+.games-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:9999;
+}
+
+.games-modal.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.games-box{
+  background:linear-gradient(180deg,var(--panel),var(--soft));
+  border-radius:18px;
+  padding:40px;
+  width:min(500px,90%);
+  text-align:center;
+  animation:fadeUp .4s ease both;
+}
+
+.games-box h3{
+  color:var(--gold);
+  margin-bottom:30px;
+  letter-spacing:2px;
+}
+
+.games-grid{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.game-card{
+  background:#202020;
+  border:1px solid rgba(211,163,74,.4);
+  border-radius:14px;
+  padding:20px;
+  text-decoration:none;
+  color:var(--text);
+  font-weight:700;
+  transition:.3s;
+}
+
+.game-card span{
+  display:block;
+  font-weight:400;
+  font-size:14px;
+  color:var(--muted);
+  margin-top:6px;
+}
+
+.game-card:hover{
+  background:var(--gold);
+  color:#111;
+  transform:translateY(-4px);
+}
+
+.game-card.disabled{
+  opacity:.4;
+  pointer-events:none;
+}
+
+.close-games{
+  margin-top:25px;
+  padding:8px 18px;
+  border-radius:20px;
+  border:1px solid rgba(211,163,74,.4);
+  background:none;
+  color:var(--muted);
+  cursor:pointer;
+  transition:.3s;
+}
+
+.close-games:hover{
+  background:var(--gold);
+  color:#111;
+}
 }
 
 </style>
@@ -424,7 +512,7 @@ footer{
       <a href="#tym">TÝM</a>
       <a href="#kvizy">KVÍZY</a>
       <a href="#liga">LIGA</a>
-      <a href="game.html">GAME</a>
+      <a href="#" id="openGames">GAME</a>
     </nav>
   </header>
 
@@ -527,8 +615,27 @@ footer{
     © Družstvo kočičí pracky<br>
     Vzniklo z nudy. Zůstalo kvůli pivu.
   </footer>
-
-</div>
+  
+  <div class="games-modal" id="gamesModal">
+    <div class="games-box">
+      <h3>HERNÍ ARÉNA</h3>
+  
+      <div class="games-grid">
+        <a href="game.html" class="game-card">
+          👑 TlapKing
+          <span>Arkádová mobilní hra</span>
+        </a>
+  
+        <div class="game-card disabled">
+          🧠 Mini kvíz
+          <span>Brzy...</span>
+        </div>
+      </div>
+  
+      <button id="closeGames" class="close-games">Zavřít</button>
+    </div>
+  </div>
+  </div>
 
 <div class="lightbox" id="lightbox"><img src=""></div>
 
@@ -738,6 +845,7 @@ document.querySelectorAll(".member").forEach(card=>{
 
 </body>
 </html>
+
 
 
 
