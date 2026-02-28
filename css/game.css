@@ -1,0 +1,328 @@
+/* =========================
+   👑 TLAPKING – FULL STYLE
+   (samostatné pro game – nepotřebuje style.css)
+   ========================= */
+
+/* ROOT BARVY */
+:root{
+  --bg:#0e0e11;
+  --panel:#171717;
+  --soft:#1f1f1f;
+  --text:#e6e6e6;
+  --muted:#a9a9a9;
+  --gold:#d3a34a;
+  --gold-rgba: rgba(211,163,74,0.35);
+}
+
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  font-family:'EB Garamond',serif;
+  background:
+    radial-gradient(circle at top, #1a1a1a 0%, #0e0e11 45%),
+    linear-gradient(180deg,#0e0e11,#121212);
+  color:var(--text);
+  font-size:18px;
+  line-height:1.75;
+}
+
+/* MEOW BACKGROUND */
+.meow-layer{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  opacity:.05;
+  font-size:90px;
+  letter-spacing:60px;
+  transform:rotate(-12deg);
+  display:flex;
+  flex-wrap:wrap;
+  align-content:flex-start;
+}
+
+.meow-layer span{
+  white-space:nowrap;
+  margin:40px;
+}
+
+/* PAGE WRAPPER */
+.page{
+  position:relative;
+  z-index:1;
+  max-width:980px;
+  margin:auto;
+  padding:0 20px 20px 20px;  /* žádný top padding */
+}
+
+main{
+  margin:0;
+  padding:0;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding-top:20px;
+  padding-bottom:0;
+  margin:0;
+}
+
+.hero .tag{
+  color:var(--muted);
+  font-size:14px;
+  font-style:italic;
+}
+
+.hero h2{
+  font-size:clamp(28px,4vw,44px);
+  color:var(--gold);
+  font-weight:800;
+  margin:10px 0 10px;
+}
+
+.hero p{
+  color:var(--muted);
+  margin:0;
+}
+
+.tlapking-logo{
+  max-width:420px;
+  width:70%;
+  display:block;
+  margin:-70px auto -95px;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.6));
+}
+
+.back-wrapper{
+  margin-top:10px;
+  text-align:center;
+}
+
+/* SECTION */
+section{
+  background:linear-gradient(180deg,var(--panel),var(--soft));
+  border-radius:18px;
+  padding:30px 28px;
+  margin:30px 0 60px 0;
+  box-shadow:0 10px 30px rgba(0,0,0,0.45);
+  border:1px solid rgba(255,255,255,0.02);
+}
+
+/* GAME INFO */
+.game-info{
+  display:flex;
+  justify-content:space-between;
+  font-size:18px;
+  margin-bottom:18px;
+  color:var(--gold);
+  font-weight:600;
+}
+
+/* STAT BOX (Skóre & Životy) */
+
+.game-info{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:20px;
+  gap:15px;
+}
+
+.stat-box{
+  flex:1;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 18px;
+  border-radius:14px;
+  background:linear-gradient(180deg,var(--panel),var(--soft));
+  border:1px solid rgba(211,163,74,0.25);
+  box-shadow:0 6px 20px rgba(0,0,0,0.4);
+  font-weight:600;
+  color:var(--gold);
+}
+
+.stat-icon{
+  font-size:20px;
+}
+
+/* GAME AREA */
+#gameArea{
+  position:relative;
+  width:100%;
+  height:62vh;
+  border-radius:14px;
+  overflow:hidden;
+  margin-top:10px;
+  border:1px solid rgba(255,255,255,0.03);
+  background:
+    radial-gradient(circle at top, rgba(211,163,74,0.12), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.25));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+/* OBJECTS */
+.object{
+  position:absolute;
+  font-size:42px;
+  user-select:none;
+  cursor:pointer;
+  transition:transform .12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.object:active{
+  transform:scale(1.18);
+}
+
+/* LIGA / BUTTON STYLE — stejný vizuál jako na index.html */
+.liga-btn{
+  display:inline-block;
+  padding:14px 36px;
+  border-radius:60px;
+  font-weight:700;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.25s;
+  border:1px solid var(--gold-rgba); /* zlatý průhledný border jako na index */
+  background:transparent;
+  color:var(--gold);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+/* primární varianta (plná zlatá) */
+.liga-btn.primary{
+  background:var(--gold);
+  color:#111;
+  border:1px solid rgba(0,0,0,0.12); /* drobný tmavý okraj na plné barvě */
+}
+
+/* hover / light efekt */
+.liga-btn:hover{
+  transform:translateY(-3px);
+  box-shadow: 0 14px 40px rgba(211,163,74,0.12);
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.08));
+  color:var(--gold);
+}
+
+/* hover pro primární (zlatý) */
+.liga-btn.primary:hover{
+  background: color-mix(in srgb, var(--gold) 90%, black 10%);
+  color:#111;
+  box-shadow:0 14px 40px rgba(211,163,74,0.35);
+}
+
+/* INPUT */
+input{
+  background:#202020;
+  border:1px solid #2a2a2a;
+  padding:12px 16px;
+  border-radius:12px;
+  color:var(--text);
+  font-family:'EB Garamond',serif;
+  font-size:16px;
+  margin-top:10px;
+  outline:none;
+  transition:.2s;
+}
+
+input:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 10px rgba(211,163,74,0.12);
+}
+
+/* LEADERBOARD */
+ol{
+  list-style:none;
+  padding:0;
+}
+
+ol li{
+  padding:12px 0;
+  border-bottom:1px dashed #2a2a2a;
+  color:var(--muted);
+  transition:.2s;
+}
+
+ol li:hover{
+  color:var(--gold);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:30px 0;
+  font-size:14px;
+}
+
+/* HIDDEN */
+.hidden{
+  display:none;
+}
+
+/* MOBILE */
+@media (max-width:768px){
+
+  section{
+    padding:22px 16px;
+  }
+
+  #gameArea{
+    height:54vh;
+  }
+
+  .object{
+    font-size:36px;
+  }
+
+  .liga-btn{
+    width:100%;
+    text-align:center;
+  }
+
+  .tlapking-logo{
+    width:85%;
+  }
+
+  #gameArea.rage{
+  box-shadow:0 0 40px rgba(211,163,74,0.35);
+  border:1px solid rgba(211,163,74,0.5);
+  }
+  /* FLOATING TEXT */
+  .floating-text{
+    position:absolute;
+    font-weight:700;
+    pointer-events:none;
+    animation:floatUp 800ms ease-out forwards;
+    font-size:18px;
+  }
+
+  @keyframes floatUp{
+    from{
+      opacity:1;
+      transform:translateY(0);
+    }
+    to{
+      opacity:0;
+      transform:translateY(-40px);
+    }
+  }
+
+  /* BUFF STATUS PANEL */
+  .buff-status{
+    margin-top:10px;
+    padding:8px 14px;
+    border-radius:12px;
+    border:1px solid rgba(211,163,74,0.4);
+    color:var(--gold);
+    font-weight:600;
+    text-align:center;
+    background:rgba(0,0,0,0.25);
+  }
+
+  .buff-status.hidden{
+    display:none;
+  }
+}
