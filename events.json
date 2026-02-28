@@ -1,5 +1,15 @@
 [
   {
+    "quizName": "ZNĚLKY POŘADŮ",
+    "date": "24.2.2026",
+    "points": 24,
+    "position": 5,
+    "description": "Náš tým se znovu vydal na vědomostní lov – tentokrát na téma Znělky pořadů. Byl to pořádný škrábací souboj! Uši napjaté jako kočka před skokem, mozkové závity předením zahřívané do maxima… a nakonec jsme si vybojovali krásné páté místo. Skóre bylo těsné jako klubko v tlapkách, ale jsme hrdí na každý bod. A večer jsme si samozřejmě užili tak, jak se na správnou smečku sluší.",
+    "photos": [
+      "https://raw.githubusercontent.com/AktarusCZ/Kocicy-pracky/main/04.jpg"
+    ]
+  },
+  {
     "quizName": "POZNEJ MÍSTO",
     "date": "17.2.2026",
     "points": 31,
@@ -44,6 +54,7 @@
     "description": "Skvělá akce obohacená o hledání prokletého zlata a mnoho dalších relikvií, které zlepšovaly prožitek ze hry."
   }
 ]
+
 
 
 
