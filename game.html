@@ -1,88 +1,53 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>TlapKing</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TlapKing 3.0</title>
 
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/game.css">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
-<div class="meow-layer" id="meowLayer"></div>
 
 <div class="page">
 
   <main>
 
     <div class="hero">
-      <img src="assets/tlapking.png" alt="TlapKing logo" class="tlapking-logo">
-
+      <img src="assets/tlapking.png" class="tlapking-logo">
       <div class="back-wrapper">
-        <a href="/Kocici-pracky/index.html">← ZPĚT NA WEB</a>
+        <a href="../index.html" class="back-btn">← ZPĚT NA WEB</a>
       </div>
     </div>
 
     <section>
 
       <div class="game-info">
-        <div class="stat-box">
-          <span class="stat-icon">🐾</span>
-          <span>Skóre: <strong id="score">0</strong></span>
-        </div>
-
-        <div class="stat-box">
-          <span class="stat-icon">❤️</span>
-          <span>Životy: <strong id="lives">3</strong></span>
-        </div>
+        <div class="stat-box">🐾 Skóre: <strong id="score">0</strong></div>
+        <div class="stat-box">❤️ Životy: <strong id="lives">3</strong></div>
       </div>
 
-      <div style="text-align:center;margin-bottom:15px;">
+      <div style="text-align:center;margin:15px 0;">
         <button class="liga-btn primary" onclick="startGame()">SPUSTIT LOV</button>
+      </div>
+
+      <div id="gameArea">
         <div id="buffStatus" class="buff-status hidden"></div>
       </div>
 
-      <div id="gameArea"></div>
-
-      <div id="gameOver" class="hidden" style="text-align:center;margin-top:20px;">
+      <div id="gameOver" class="hidden game-over">
         <h3>Konec hry</h3>
         <p>Tvé skóre: <span id="finalScore"></span></p>
-
-        <input type="text" id="playerName" placeholder="Tvé jméno">
-
-        <div style="margin-top:15px;">
-          <button class="liga-btn primary" onclick="saveScore()">ULOŽIT SKÓRE</button>
-        </div>
       </div>
 
-    </section>
-
-    <section class="liga">
-      <h3>🏆 ŽEBŘÍČEK TLAPKING</h3>
-      <ol id="scoresList"></ol>
     </section>
 
   </main>
 
-  <footer>
-    © TlapKing liga
-  </footer>
-
 </div>
-
-<script>
-const meows=["meow","MEOW!","Meow!"];
-const layer=document.getElementById("meowLayer");
-for(let i=0;i<45;i++){
-  const s=document.createElement("span");
-  s.textContent=meows[Math.floor(Math.random()*meows.length)];
-  layer.appendChild(s);
-}
-</script>
 
 <script src="js/game.js"></script>
 </body>
-
 </html>
