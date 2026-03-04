@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Meow Marina — Meow Marina v2</title>
+  <link rel="stylesheet" href="meowmarina.css">
+</head>
+<body>
+  <main class="root" role="application" aria-label="Meow Marina">
+    <header class="topbar">
+      <h1 class="title">⚓ Meow Marina</h1>
+      <div class="top-right">
+        <button id="btn-export" class="icon">⤓</button>
+        <button id="btn-import" class="icon">⤒</button>
+        <button id="btn-reset" class="icon danger">✖</button>
+      </div>
+    </header>
+
+    <section class="hud">
+      <div class="stat">
+        <div class="label">🐟 Rybky</div>
+        <div id="ui-fish" class="value">0</div>
+      </div>
+      <div class="stat">
+        <div class="label">🎯 Úspěch</div>
+        <div id="ui-success" class="value">—</div>
+      </div>
+      <div class="stat">
+        <div class="label">⚡ /s</div>
+        <div id="ui-persec" class="value">0</div>
+      </div>
+    </section>
+
+    <div class="game-layout">
+
+    <section class="play-area">
+
+        <div id="water" class="water">
+
+            <svg class="waves" viewBox="0 0 1200 100" preserveAspectRatio="none">
+                <path d="M0 30 Q150 0 300 30 T600 30 T900 30 T1200 30 V100 H0 Z"></path>
+            </svg>
+
+            <div class="boat">
+                <img src="assets/boat-cat.png" alt="Cat boat">
+            </div>
+
+            <div id="fish-layer" class="fish-layer"></div>
+
+        </div>
+
+        <div class="controls">
+
+            <div class="big-btn-wrap">
+                <button id="cast-btn" class="big-btn">
+                    <div id="btn-face" class="face">🐾</div>
+                    <div class="hint">Tap → Hodit</div>
+                </button>
+            </div>
+
+            <div class="meter-wrap">
+                <div id="meter" class="meter">
+                    <div id="meter-target" class="meter-target"></div>
+                    <div id="meter-indicator" class="meter-indicator"></div>
+                </div>
+                <div class="meter-hint">
+                    Tap znova když ukazatel zastaví v zelené zóně
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- LOG PANEL -->
+
+    <aside class="game-log" id="game-log">
+    <div class="log-entry">🎮 Vítej v Meow Marina!</div>
+    </aside>
+
+    </div>
+
+    <section class="panels">
+      <div class="panel">
+        <h2>Mapa</h2>
+        <div id="map-list" class="list"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Upgrady</h2>
+        <div id="upgrade-list" class="list"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Companions</h2>
+        <div id="auto-list" class="list"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="left">
+        <div id="save-ind" class="save-ind">Uloženo</div>
+      </div>
+      <div class="right">
+        <button id="btn-export2" class="small">Export</button>
+        <button id="btn-import2" class="small">Import</button>
+      </div>
+    </footer>
+
+    <!-- import dialog -->
+    <dialog id="dlg-import" class="dlg">
+      <h3>Import save (vložit JSON)</h3>
+      <textarea id="txt-save" placeholder='{"fish":...}'></textarea>
+      <div class="dlg-actions">
+        <button id="do-import" class="btn">Import</button>
+        <button id="close-import" class="btn-ghost">Zavřít</button>
+      </div>
+    </dialog>
+  </main>
+
+  <script src="meowmarina.js"></script>
+</body>
+</html>
