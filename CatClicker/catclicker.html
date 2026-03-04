@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cat Clicker — Kočičí pracky</title>
+  <link rel="stylesheet" href="catclicker.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1 class="brand"></h1>
+    <button id="btn-export" class="icon-btn" title="Export / Import uložené hry">⇪</button>
+  </header>
+
+  <main class="game-root">
+    <div class="game-logo">
+      <img src="catclicker.png" alt="Cat Clicker">
+    </div>  
+    <section class="score-panel">
+      <div id="score" class="score">0 <span class="label">pracky</span></div>
+      <div id="persec" class="persec">0 /s</div>
+    </section>
+
+    <section class="cat-area">
+      <button id="cat-btn" class="cat-btn" aria-label="Klikni pro pracky">
+        <span class="cat-face">🐾</span>
+      </button>
+      <div id="click-anim" class="click-anim" aria-hidden="true"></div>
+    </section>
+
+    <section class="panels">
+        <div class="panel">
+          <h2>Upgrady</h2>
+          <div id="upgrades"></div>
+        </div>
+
+        <div class="panel">
+          <h2>Automatické</h2>
+          <div id="autoclickers"></div>
+        </div>
+
+          </div> 
+        <h2>Prestige</h2>
+        <div class="prestige-box">
+          <div id="prestige-points">0</div>
+          <button id="btn-prestige" class="primary">Prestige</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="bottom-controls">
+      <button id="btn-reset" class="danger">Reset</button>
+      <div class="save-indicator" id="save-indicator">Uloženo</div>
+    </section>
+  </main>
+
+  <!-- Export / Import modal -->
+  <dialog id="dlg-save" class="dlg">
+    <h3>Uložená hra — export / import</h3>
+    <textarea id="txt-save" spellcheck="false"></textarea>
+    <div class="dlg-actions">
+      <button id="dlg-import" class="primary">Importovat</button>
+      <button id="dlg-close">Zavřít</button>
+    </div>
+  </dialog>
+
+  <script src="catclicker.js"></script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+/* catclicker.css
+   Kompletní elegantní styl pro Cat Clicker, navázaný na styl webu Kočičí pracky.
+   Používá vaše root proměnné: --panel, --soft, --gold, --text, --muted, ...
+   Cílí výhradně na .game-root a potomky, aby nezasahoval do ostatních sekcí.
+*/
+
+/* --------------------------
+   Kontejner (izolace stylů)
+   -------------------------- */
+body{
+  background:
+    radial-gradient(circle at top, #1a1a1a 0%, #0e0e11 45%),
+    linear-gradient(180deg,#0e0e11,#121212);
+}
+
+.game-root{
+  --panel-bg: var(--panel, #171717);
+  --panel-soft: var(--soft, #1f1f1f);
+  --accent: var(--gold, #d3a34a);
+  --text:  var(--text, #e6e6e6);
+  --muted: var(--muted, #a9a9a9);
+  --radius: 18px;
+
+  width:100%;
+  max-width:820px;
+  margin:28px auto;
+  padding:28px;
+  border-radius:var(--radius);
+  background: linear-gradient(180deg, var(--panel-bg), var(--panel-soft));
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.02);
+  color:var(--text);
+  font-family: 'EB Garamond', serif;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+
+.game-logo{
+display:flex;
+justify-content:center;
+align-items:center;
+margin-bottom:-100px;
+margin-top:-100px;
+}
+
+.game-logo img{
+
+width:200%;
+max-width:1000px;
+
+max-height:300px;
+
+object-fit:contain;
+
+display:block;
+margin:auto;
+
+}
+
+/* --------------------------
+   Topbar / Nadpis
+   -------------------------- */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:18px;
+}
+.brand{
+  font-size:34px;
+  color:var(--accent);
+  letter-spacing:2px;
+  font-weight:800;
+  margin:0;
+  text-shadow:0 2px 8px rgba(211,163,74,0.08);
+}
+.icon-btn{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.04);
+  color:var(--text);
+  padding:8px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* --------------------------
+   Score panel
+   -------------------------- */
+.score-panel{
+  text-align:center;
+  margin-bottom:14px;
+}
+.score{
+  font-size:40px;
+  font-weight:900;
+  color:var(--accent);
+  margin:0 0 6px 0;
+  line-height:1;
+  letter-spacing:0.5px;
+}
+.score .label{
+  font-size:13px;
+  color:var(--muted);
+  margin-left:8px;
+  font-weight:400;
+}
+
+.persec{
+font-size:14px;
+color:var(--accent);
+opacity:.9;
+}
+
+/* --------------------------
+   Cat (hlavní tlačítko)
+   -------------------------- */
+.cat-area{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:10px 0 18px;
+}
+.cat-btn{
+  width:210px;
+  height:210px;
+  border-radius:50%;
+  background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.02), transparent 10%), #0f0f0f;
+  border:2px solid var(--gold);
+  box-shadow:
+  0 0 20px rgba(211,163,74,.3),
+  0 0 50px rgba(211,163,74,.1),
+  inset 0 0 30px rgba(0,0,0,.8);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+  -webkit-tap-highlight-color: transparent;
+  position:relative;
+  overflow:visible;
+}
+.cat-btn:active{ transform: scale(.96); filter:brightness(.96); }
+.cat-face{
+  font-size:56px;
+  pointer-events:none;
+  transform:translateY(2px);
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.7));
+}
+
+.click-number{
+
+color:var(--accent);
+
+font-weight:900;
+
+font-size:20px;
+
+text-shadow:
+0 0 10px rgba(211,163,74,.8),
+0 0 20px rgba(211,163,74,.4);
+
+}
+
+/* click sparkle (generované JS budou elementy uvnitř #click-anim) */
+#click-anim{ position:relative; height:0; pointer-events:none; }
+#click-anim .click-pop{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  top:-36px;
+  color:var(--accent);
+  font-weight:900;
+  text-shadow:
+    0 0 8px rgba(211,163,74,.7),
+    0 0 20px rgba(211,163,74,.5);
+  transition: transform .8s cubic-bezier(.2,.9,.2,1), opacity .8s;
+  will-change:transform,opacity;
+}
+
+/* --------------------------
+   Panels (shop / auto / prestige)
+   -------------------------- */
+.panels{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:18px;
+  margin-top:6px;
+}
+
+/* každý panel vypadá jako oddělená karta */
+.panel{
+  background:#1c1c1c;
+  border-radius:12px;
+  padding:16px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.02);
+}
+.panel h2{
+  margin:0 0 12px 0;
+  font-size:16px;
+  color:var(--accent);
+  letter-spacing:1px;
+}
+
+/* seznam položek */
+.list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  background:linear-gradient(180deg,#202020,#181818);
+  padding:12px;
+  border-radius:10px;
+  border:1px solid rgba(211,163,74,0.12);
+}
+.item .meta{ display:flex; flex-direction:column; }
+.item .name{ color:var(--accent); font-weight:700; font-size:15px; }
+.item .desc{
+color:var(--accent);
+font-size:13px;
+margin-top:4px;
+}
+
+.item .status{
+color:var(--accent);
+font-size:13px;
+}
+
+.item button{
+background:var(--accent);
+color:#111;
+border:none;
+padding:4px 10px;
+border-radius:6px;
+cursor:pointer;
+font-family:'EB Garamond', serif;
+transition:.15s;
+}
+
+.item button:hover{
+filter:brightness(1.1);
+}
+/* --------------------------
+   Buttons (slavné stylové tlačítka)
+   -------------------------- */
+/* primární (zlaté) */
+.btn-gold{
+  background: linear-gradient(180deg, var(--accent), color-mix(in srgb, var(--accent) 60%, black 40%));
+  color:#120d00;
+  border:none;
+  padding:8px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:700;
+  font-family:'EB Garamond', serif;
+  box-shadow: 0 6px 18px rgba(211,163,74,0.12), inset 0 -2px 8px rgba(0,0,0,0.14);
+  transition: transform .12s, filter .12s, box-shadow .12s;
+}
+.btn-gold:hover{ transform:translateY(-2px); filter:brightness(1.03); }
+.btn-gold:active{ transform:translateY(0); filter:brightness(.98); }
+
+/* sekundární (transparentní, jemný rámeček) */
+.btn-ghost{
+  background:transparent;
+  color:var(--text);
+  border:1px solid rgba(255,255,255,0.04);
+  padding:8px 12px;
+  border-radius:12px;
+  cursor:pointer;
+  transition: background .12s, color .12s;
+}
+.btn-ghost:hover{ background:rgba(255,255,255,0.02); }
+
+/* danger */
+.btn-danger{
+  background:#7a2b2b;
+  color:white;
+  padding:8px 12px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+}
+
+/* prestige bar styled like liga button */
+.prestige-box .primary{
+  display:block;
+  width:100%;
+  margin-top:8px;
+  text-align:center;
+  border-radius:14px;
+  padding:10px 12px;
+}
+
+/* --------------------------
+   Bottom area
+   -------------------------- */
+.bottom-controls{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:18px;
+}
+.save-indicator{ color:var(--muted); font-size:13px; }
+
+/* --------------------------
+   Small UI polish
+   -------------------------- */
+.panel .empty{
+  color:rgba(255,255,255,0.04);
+  font-style:italic;
+  padding:26px;
+  border-radius:10px;
+  text-align:left;
+}
+
+.prestige-box button{
+background:linear-gradient(180deg,#e6b65a,#a97a2b);
+color:#111;
+border:none;
+padding:10px;
+border-radius:20px;
+font-weight:700;
+font-family:'EB Garamond', serif;
+cursor:pointer;
+}
+/* subtle divider for large layout */
+@media(min-width:800px){
+  .panels{
+    grid-template-columns:1fr 1fr;
+  }
+  .game-root{ padding:36px; }
+}
+
+/* mobile adjustments */
+@media(max-width:520px){
+  .game-root{ padding:18px; margin:18px 14px; border-radius:14px; }
+  .cat-btn{ width:160px; height:160px;box-shadow:
+0 0 30px rgba(211,163,74,.45),
+0 0 60px rgba(211,163,74,.15),
+inset 0 0 30px rgba(0,0,0,.8); }
+  .score{ font-size:28px; }
+  .panels{ gap:12px; }
+}
+
+/* click-floating particle style (JS appends .pop elements) */
+.pop-gold{
+  color:var(--accent);
+  font-weight:900;
+  text-shadow:0 3px 12px rgba(0,0,0,0.6);
+  transform-origin:center;
+}
+
+/* accessibility: focus outlines */
+button:focus{ outline:3px solid rgba(211,163,74,0.18); outline-offset:3px; }
+
+/* dialog (export/import) styling */
+dialog.dlg{
+  background: linear-gradient(180deg, var(--panel-bg), var(--panel-soft));
+  color:var(--accent);
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.03);
+  padding:14px;
+}
+.dialog textarea#txt-save{
+  width:100%; height:220px; font-family:monospace; border-radius:8px; padding:8px;
+  background:#0e0e10; color:var(--accent); border:1px solid rgba(255,255,255,0.03);
+}
+
+/* small animation to draw attention to golden button (used sparingly) */
+@keyframes gold-pulse{
+  0%{ box-shadow:0 8px 18px rgba(211,163,74,0.09); transform:translateY(0); }
+  50%{ box-shadow:0 20px 50px rgba(211,163,74,0.16); transform:translateY(-2px); }
+  100%{ box-shadow:0 8px 18px rgba(211,163,74,0.09); transform:translateY(0); }
+}
+.btn-gold.pulse{ animation: gold-pulse 2s infinite; }
+
+/* end of file */
