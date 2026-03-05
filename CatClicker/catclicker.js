@@ -47,6 +47,13 @@
   function fmt(n){
   if(n < 1000) return Math.floor(n).toLocaleString();
   const units = [
+  {v:1e33,s:"Dc"},
+  {v:1e30,s:"No"},
+  {v:1e27,s:"Oc"},
+  {v:1e24,s:"Sp"},
+  {v:1e21,s:"Sx"},
+  {v:1e18,s:"Qi"},
+  {v:1e15,s:"Qa"},
   {v:1e12,s:"T"},
   {v:1e9,s:"B"},
   {v:1e6,s:"M"},
@@ -76,27 +83,157 @@
   // Autoclickers: id, name, baseCost, costMult, cps (per unit), description
   const AUTOCLICKER_DEFS = [
 
-  { id:'paw-helper', name:'Tlapky', baseCost:25, costMult:1.5, cps:0.5, unlock:0, desc:'+0.5 pracky / s' },
-  { id:'fisher', name:'Rybář', baseCost:500, costMult:1.6, cps:8, unlock:200, desc:'+8 pracek / s' },
-  { id:'breeder', name:'Množitel', baseCost:8000, costMult:1.7, cps:120, unlock:3000, desc:'+120 pracek / s' },
-  { id:'factory', name:'Továrna', baseCost:150000, costMult:1.75, cps:2000, unlock:10000, desc:'+2000 pr/s' },
-  { id:'lab', name:'Laboratoř', baseCost:5000000, costMult:1.8, cps:50000, unlock:200000, desc:'+50k pr/s' },
-  { id:'portal', name:'Kočičí portál', baseCost:200000000, costMult:1.9, cps:2000000, unlock:2000000, desc:'+2M pr/s' },
-  { id:'planet', name:'Kočičí planeta', baseCost:10000000000, costMult:2.0, cps:80000000, unlock:500000000, desc:'+80M pr/s' },
-  { id:'galaxy', name:'Kočičí galaxie', baseCost:500000000000, costMult:2.1, cps:3000000000, unlock:5000000000, desc:'+3B pr/s' }
-
+    { id:'paw-helper', name:'Tlapky', baseCost:25, costMult:1.5, cps:0.5, unlock:0, desc:'+0.5 pracky / s' },
+    { id:'fisher', name:'Rybář', baseCost:500, costMult:1.6, cps:8, unlock:200, desc:'+8 pracek / s' },
+    { id:'breeder', name:'Množitel', baseCost:8000, costMult:1.7, cps:120, unlock:3000, desc:'+120 pracek / s' },
+    { id:'factory', name:'Továrna', baseCost:150000, costMult:1.75, cps:2000, unlock:10000, desc:'+2000 pr/s' },
+    { id:'lab', name:'Laboratoř', baseCost:5000000, costMult:1.8, cps:50000, unlock:200000, desc:'+50k pr/s' },
+    { id:'portal', name:'Kočičí portál', baseCost:200000000, costMult:1.9, cps:2000000, unlock:2000000, desc:'+2M pr/s' },
+    { id:'planet', name:'Kočičí planeta', baseCost:10000000000, costMult:2.0, cps:80000000, unlock:500000000, desc:'+80M pr/s' },
+    { id:'galaxy', name:'Kočičí galaxie', baseCost:500000000000, costMult:2.1, cps:3000000000, unlock:5000000000, desc:'+3B pr/s' },
+    { id:'university', name:'Kočičí univerzita', baseCost:1e12, costMult:2.1, cps:5e9, unlock:1e10 },
+    { id:'time_machine', name:'Stroj času', baseCost:1e15, costMult:2.2, cps:2e12, unlock:1e13 },
+    { id:'dimension', name:'Kočičí dimenze', baseCost:1e18, costMult:2.3, cps:1e15, unlock:1e16 },
+    { id:'blackhole', name:'Kočičí černá díra', baseCost:1e22, costMult:2.4, cps:1e18, unlock:1e20 },
+    { id:'multiverse', name:'Kočičí multivesmír', baseCost:1e27, costMult:2.5, cps:1e22, unlock:1e25 }  
   ];
 
   // Upgrady: id, name, baseCost, costMult, type, value, maxLevel (0 = neomezeno), descriptionFn
   // type: 'click' => zvyšuje clickPower, 'cps' => multiplikátor CPS, 'global' => obecný efekt
-  const UPGRADE_DEFS = [
-    { id:'click1', name:'Silnější tlapky', baseCost:10, costMult:1.6, type:'click', value:1, desc:'+1 pracka za klik' },
-    { id:'click2', name:'Kočičí krmivo', baseCost:120, costMult:1.7, type:'click', value:5, desc:'+5 pracek za klik' },
-    { id:'click3', name:'Trénink koček', baseCost:2000, costMult:1.7, type:'click', value:25, desc:'+25 pracek za klik' },
-    { id:'cps1', name:'Lepší nástroje', baseCost:2000, costMult:1.6, type:'cps', value:0.10, desc:'+10% produkce' },
-    { id:'cps2', name:'Průmyslové tlapky', baseCost:20000, costMult:1.7, type:'cps', value:0.25, desc:'+25% produkce' },
-    { id:'cps3', name:'Mega továrny', baseCost:200000, costMult:1.8, type:'cps', value:0.50, desc:'+50% produkce' }
+    const UPGRADE_DEFS = [
+
+/* EARLY GAME */
+
+  {
+  id:"sharp_claws",
+  name:"Ostré drápky",
+  baseCost:25,
+  costMult:2,
+  type:"click_flat",
+  value:1,
+  unlock:0,
+  desc:"+1 pracka za klik"
+  },
+
+  {
+  id:"steel_paws",
+  name:"Ocelové tlapky",
+  baseCost:200,
+  costMult:2.2,
+  type:"click_flat",
+  value:5,
+  unlock:100,
+  desc:"+5 pracek za klik"
+  },
+
+  {
+  id:"cat_gloves",
+  name:"Kočičí rukavice",
+  baseCost:1500,
+  costMult:2.3,
+  type:"click_mult",
+  value:1.5,
+  unlock:500,
+  desc:"Klik ×1.5"
+  },
+
+  /* MID GAME */
+
+  {
+  id:"robot_claws",
+  name:"Robotické drápy",
+  baseCost:5000,
+  costMult:2.4,
+  type:"click_mult",
+  value:2,
+  unlock:3000,
+  desc:"Klik ×2"
+  },
+
+  {
+  id:"auto_tools",
+  name:"Automatizace",
+  baseCost:20000,
+  costMult:2.5,
+  type:"cps_mult",
+  value:1.5,
+  unlock:10000,
+  desc:"Produkce ×1.5"
+  },
+
+  {
+  id:"factory_ai",
+  name:"AI továrny",
+  baseCost:250000,
+  costMult:2.6,
+  type:"factory_boost",
+  target:"factory",
+  value:2,
+  unlock:100000,
+  desc:"Továrny ×2 výkon"
+  },
+
+  /* LATE GAME */
+
+  {
+  id:"cat_research",
+  name:"Kočičí výzkum",
+  baseCost:2000000,
+  costMult:2.8,
+  type:"global_mult",
+  value:2,
+  unlock:500000,
+  desc:"Celá produkce ×2"
+  },
+
+  {
+  id:"quantum_claws",
+  name:"Kvantové drápy",
+  baseCost:20000000,
+  costMult:3,
+  type:"click_mult",
+  value:3,
+  unlock:2000000,
+  desc:"Klik ×3"
+  },
+
+  {
+  id:"dimensional_factory",
+  name:"Dimenzionální továrny",
+  baseCost:200000000,
+  costMult:3.2,
+  type:"factory_boost",
+  target:"factory",
+  value:5,
+  unlock:20000000,
+  desc:"Továrny ×5 výkon"
+  },
+
+  /* ENDGAME */
+
+  {
+  id:"cat_singularity",
+  name:"Kočičí singularita",
+  baseCost:5000000000,
+  costMult:3.5,
+  type:"global_mult",
+  value:5,
+  unlock:500000000,
+  desc:"Celá produkce ×5"
+  }
+
   ];
+  function isUnlocked(def){
+  if(!def.unlock) return true;
+  if(def.unlock.total && G.state.total < def.unlock.total) return false;
+  if(def.unlock.units){
+  for(const k in def.unlock.units){
+  if((G.state.units[k]||0) < def.unlock.units[k]) return false;
+  }
+  }
+  return true;
+  }
+
 
   // Achievements: id, name, desc, condition(state) => boolean, reward: { type:'paws'|'prestige'|'unlock', value }
   const ACHIEVEMENT_DEFS = [
@@ -136,6 +273,28 @@
     autosaveHandle: null,
     ui: {},
   };
+
+  let buyMode = 1;
+  document.querySelectorAll("[data-buy]").forEach(btn=>{
+  btn.onclick = ()=>{
+  document.querySelectorAll("[data-buy]").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  const val = btn.dataset.buy;
+  buyMode = val === "max" ? "max" : parseInt(val);
+  };
+  });
+
+  function buyMax(def){
+  let bought = 0;
+  while(true){
+  const cost = getNextUnitCost(def);
+  if(G.state.paws < cost) break;
+  G.state.paws -= cost;
+  incUnit(def.id,1);
+  bought++;
+  }
+  return bought;
+  }
 
   /*** ========== SAVE / LOAD / EXPORT / IMPORT ========== ***/
   function saveGame() {
@@ -243,20 +402,30 @@
     // základní exponenciální: base * mult^level, ale zjemníme pro velká čísla
     return Math.floor(base * Math.pow(mult, level));
   }
+
   function calculateCPS(){
-    let cps = 0;
-    for(const def of AUTOCLICKER_DEFS){
+  let cps = 0;
+  for(const def of AUTOCLICKER_DEFS){
+    let power = def.cps;
+    // aplikace upgrade boostů
+    for(const up of UPGRADE_DEFS){
+      const lvl = getUpgradeLevel(up.id);
+      if(!lvl) continue;
+      if(up.type === "factory_boost" && up.target === def.id){
+        power *= Math.pow(up.value,lvl);
+      }
+    }
     const count = G.state.units[def.id] || 0;
-    if(count > 0){
-    cps += count * def.cps;
-    }
-    }
-    // prestige multiplier
-    cps *= (1 + (G.state.prestigePoints * 0.02));
-    // global multiplier
-    cps *= (G.state.cpsMultiplier || 1);
-    return cps;
+    cps += count * power;
   }
+  // prestige bonus
+  cps *= (1 + (G.state.prestigePoints * 0.02));
+  // global multipliers
+  cps *= (G.state.cpsMultiplier || 1);
+  return cps;
+  }
+
+  
   function getNextUnitCost(def) {
     const level = getUnitCount(def.id);
     return calcCost(def.baseCost, def.costMult, level);
@@ -267,6 +436,17 @@
     return calcCost(def.baseCost, def.costMult, lvl);
   }
 
+  function updatePrestigeStyle(){
+  const el = document.querySelector(".prestige-display");
+
+  if(!el) return;
+  const p = G.state.prestigePoints;
+  const glow = Math.min(p*3,30);
+  const border = Math.min(2 + p*0.3,6);
+  el.style.borderWidth = border + "px";
+  el.style.boxShadow =
+  `0 0 ${glow}px rgba(211,163,74,.6)`;
+  }
   /*** ========== UI: tvorba elementů a render ========== ***/
   function createUnitElement(def) {
     const item = document.createElement('div');
@@ -456,22 +636,30 @@ function spawnGoldenPaw(){
     return G.state.paws >= cost;
   }
 
-  function buyUnit(id) {
-    const def = AUTOCLICKER_DEFS.find(d => d.id === id);
-    if (!def) return;
+  function buyUnit(id){
+    const def = AUTOCLICKER_DEFS.find(d=>d.id===id);
+    if(!def) return;
+    if(buyMode === "max"){
+    while(true){
     const cost = getNextUnitCost(def);
-    if (!canAfford(cost)) {
-      flashBuyFail(id);
-      return;
-    }
+    if(G.state.paws < cost) break;
     G.state.paws -= cost;
-    incUnit(id, 1);
+    incUnit(id,1);
+    }
+    }else{
+    for(let i=0;i<buyMode;i++){
+    const cost = getNextUnitCost(def);
+    if(G.state.paws < cost) break;
+    G.state.paws -= cost;
+    incUnit(id,1);
     // small visual feedback
     spawnFloatingText('-' + fmt(cost), null, { color: '#f2b84f' });
     updateListsUI();
     applyDerivedState();
     renderHeader();
     checkAchievements();
+  }
+  }
   }
 
   function buyUpgrade(id) {
@@ -643,10 +831,14 @@ function spawnGoldenPaw(){
   }
 
   /*** ========== RANDOM EVENT: GOLDEN FISH (bonus) ========== ***/
-  function maybeSpawnGoldenFish() {
-    // drobná pravděpodobnost každých 20-40s
-    if (Math.random() < 0.08) {
-      spawnGoldenFish();
+  function maybeSpawnGoldenFish(){
+    let chance = 0.08;
+    // bonus z prestige shopu
+    if(G.state.prestigeUpgrades?.golden_fish_luck){
+    chance *= 1.2; // +20%
+    }
+    if(Math.random() < chance){
+    spawnGoldenFish();
     }
   }
 
@@ -685,38 +877,44 @@ function spawnGoldenPaw(){
   function applyDerivedState(){
   // reset základních hodnot
   G.state.clickPower = 1;
-  let mult = 1;
-  // přepočet všech upgrade bonusů
+  let globalMult = 1;
+  let cpsMult = 1;
+  // projít upgrady
   for(const def of UPGRADE_DEFS){
   const lvl = getUpgradeLevel(def.id);
   if(!lvl) continue;
-  // klik bonus
-  if(def.type === "click"){
+  /* FLAT CLICK BONUS */
+  if(def.type === "click_flat"){
   G.state.clickPower += def.value * lvl;
   }
-  // CPS bonus
-  if(def.type === "cps"){
-  mult *= (1 + def.value * lvl);
+  /* CLICK MULTIPLIER */
+  if(def.type === "click_mult"){
+  G.state.clickPower *= Math.pow(def.value,lvl);
   }
+  /* CPS MULTIPLIER */
+  if(def.type === "cps_mult"){
+  cpsMult *= Math.pow(def.value,lvl);
   }
-  // uložit globální multiplikátor
-  G.state.cpsMultiplier = mult;
+  /* GLOBAL MULTIPLIER */
+  if(def.type === "global_mult"){
+  globalMult *= Math.pow(def.value,lvl);
+  }
+
+  }
+  G.state.cpsMultiplier = cpsMult * globalMult;
   }
 
   /*** ========== TICK FUNKCE ========== ***/
-  function tick(){
-  const cps = calculateCPS();
-  if(cps > 0){
+
+function tick(){
+const cps = calculateCPS();
+if(cps > 0){
   G.state.paws += cps;
   G.state.total += cps;
-  }
-  const prevTotal = G.state.total;
-  G.state.total += cps;
-  if(Math.floor(prevTotal/1000) !== Math.floor(G.state.total/1000)){
-  renderUnitsList();
-  }
-  renderAll();
-  }
+}
+renderAll();
+
+}
 
   /*** ========== CONNECT UI a STARTUP ========== ***/
   function bindStaticButtons() {
@@ -763,6 +961,7 @@ function spawnGoldenPaw(){
     renderUpgradesList();
     renderAchievements();
     bindStaticButtons();
+    bindPrestigeUI();
     applyDerivedState();
     renderAll();
     // start ticks
@@ -827,6 +1026,175 @@ function spawnGoldenPaw(){
     performPrestige,
     format: fmt
   };
+
+  
+/*** ========== PRESTIGE SHOP (SAFE) ========== ***/
+// definice obchodu (relikvie)
+
+// funkce vykreslení obchodu (pouze DOM-safe)
+function renderPrestigeShop(){
+  const container = document.getElementById('prestige-items');
+  if(!container) return;
+  container.innerHTML = '';
+
+  for(const it of PRESTIGE_SHOP){
+    const row = document.createElement('div');
+    row.className = 'prestige-item item';
+    row.style.display = 'flex';
+    row.style.justifyContent = 'space-between';
+    row.style.alignItems = 'center';
+    row.innerHTML = `
+      <div class="meta">
+        <div class="name">${it.name}</div>
+        <div class="desc">${it.desc}</div>
+      </div>
+      <div style="text-align:right">
+        <div class="status">${it.cost} relikvií</div>
+        <button class="btn-gold" data-id="${it.id}">Koupit</button>
+      </div>`;
+    container.appendChild(row);
+
+    const btn = row.querySelector('button');
+    btn.addEventListener('click', () => {
+      buyPrestigeItem(it);
+    });
+  }
+}
+
+// nákup položky v prestige shopu
+function buyPrestigeItem(item){
+  if(!G.state) return;
+  if(G.state.prestigePoints < item.cost){
+    toast("Nemáš dost relikvií.");
+    return;
+  }
+
+  // utratit
+  G.state.prestigePoints -= item.cost;
+  G.state.prestigeUpgrades = G.state.prestigeUpgrades || {};
+  // uložit, co hráč koupil (můžeme také uchovat levely později)
+  G.state.prestigeUpgrades[item.id] = (G.state.prestigeUpgrades[item.id] || 0) + 1;
+
+  // aplikovat okamžité efekty (některé vyžadují změnu stavu / multiplikátorů)
+  if(item.type === "golden_chance"){
+    // efekt čteme v maybeSpawnGoldenFish()
+  } else if(item.type === "click_mult"){
+    // přidáme do derivátů - implementujeme jako "syntetický" upgrade
+    // pro jednoduchost přidáme záznam do upgrades nebo do prestigeUpgrades detailněji
+    // zde si jen uložíme flag — a applyDerivedState zohlední prestižní buffy
+  } else if(item.type === "factory_mult" || item.type === "global_mult" || item.type === "prestige_scaling"){
+    // necháme applyDerivedState běžet a renderAll aktualizuje UI
+  }
+
+  applyDerivedState();
+  renderPrestigeShop();
+  renderAll();
+  saveGame();
+  toast(`Koupeno: ${item.name}`);
+}
+
+/*** ========== připojení tlačítek (bezpečně) ========== ***/
+// místo globálních getElementById volání registrovat v bindStaticButtons
+// upravíme bindStaticButtons, aby zajistil i prestige shop wiring:
+(function patchBindStaticButtons(){
+  const old = bindStaticButtons;
+  bindStaticButtons = function(...args){
+    // zavolat původní binding (klik na kočku, reset, export atd.)
+    try { old(...args); } catch(e){ console.warn("bindStaticButtons original failed:", e); }
+
+    // teď bezpečně zaregistrujeme prestige-shop tlačítka (DOM už existuje)
+    const btnPrestigeShop = document.getElementById("btn-prestige-shop");
+    const prestigeShopPanel = document.getElementById("prestige-shop-panel");
+    const btnClosePrestigeShop = document.getElementById("btn-close-prestige-shop");
+
+    if(btnPrestigeShop){
+      btnPrestigeShop.addEventListener('click', () => {
+        if(prestigeShopPanel) {
+          prestigeShopPanel.classList.remove('hidden');
+          renderPrestigeShop();
+          prestigeShopPanel.scrollIntoView({ behavior: "smooth" });
+        } else {
+          // pokud nemáme pravý panel, otevřeme v rámci levého (fallback)
+          renderPrestigeShop();
+        }
+      });
+    }
+
+    if(btnClosePrestigeShop && prestigeShopPanel){
+      btnClosePrestigeShop.addEventListener('click', () => {
+        prestigeShopPanel.classList.add('hidden');
+      });
+    }
+
+    // taky update UI pro tlačítko (vizuální stav)
+    const prestigeBtn = document.getElementById('btn-prestige-shop');
+    if(prestigeBtn){
+      prestigeBtn.classList.toggle('active', !!(G.state && G.state.prestigeUpgrades && G.state.prestigeUpgrades['golden_fish_luck']));
+    }
+  };
+})();
+
+/* =========================
+   PRESTIGE SHOP — data + UI
+   ========================= */
+
+// definuj položky obchodu relikvií
+/* ----- PRESTIGE SHOP (vložit) ----- */
+const PRESTIGE_SHOP_ITEMS = [
+  { id: 'gold_magnet', name: 'Zlatý magnet', cost: 1000, desc: '+20% šance na golden fish', apply(state){ state.prestigeBonuses = state.prestigeBonuses || {}; state.prestigeBonuses.goldChance = (state.prestigeBonuses.goldChance||0) + 0.20; } },
+  { id: 'cat_reflex',  name: 'Kočičí reflexy', cost: 1000, desc: 'Klik ×1.25', apply(state){ state.clickMultiplier = (state.clickMultiplier||1) * 1.25; } },
+  { id: 'industrial_paws', name: 'Průmyslové tlapky', cost: 1000, desc: 'Továrny ×1.15 výkon', apply(state){ state.prestigeBonuses = state.prestigeBonuses || {}; state.prestigeBonuses.factoryMult = (state.prestigeBonuses.factoryMult||1) * 1.15; } },
+  { id: 'cat_intel', name: 'Kočičí inteligence', cost: 2500, desc: 'Celková produkce ×1.10', apply(state){ state.cpsMultiplier = (state.cpsMultiplier||1) * 1.10; } },
+  { id: 'dim_pocket', name: 'Dimenzionální kapsa', cost: 10000, desc: '+5% produkce za každý prestige bod', apply(state){ state.prestigeBonuses = state.prestigeBonuses || {}; state.prestigeBonuses.perPrestigePct = (state.prestigeBonuses.perPrestigePct||0) + 0.05; } }
+];
+
+function renderPrestigeShop(){
+  const container = document.getElementById('prestige-items');
+  if(!container) return;
+  container.innerHTML = '';
+  for(const it of PRESTIGE_SHOP_ITEMS){
+    const el = document.createElement('div'); el.className='item'; el.dataset.id=it.id;
+    const meta = document.createElement('div'); meta.className='meta';
+    const name = document.createElement('div'); name.className='name'; name.textContent = it.name;
+    const desc = document.createElement('div'); desc.className='desc'; desc.textContent = it.desc;
+    meta.appendChild(name); meta.appendChild(desc);
+    const right = document.createElement('div'); right.style.textAlign='right';
+    const cost = document.createElement('div'); cost.className='status'; cost.textContent = it.cost + ' relikvií';
+    const btn = document.createElement('button'); btn.className='btn-gold'; btn.textContent='Koupit';
+    btn.addEventListener('click', ()=> buyPrestigeItem(it.id));
+    right.appendChild(cost); right.appendChild(btn);
+    el.appendChild(meta); el.appendChild(right);
+    container.appendChild(el);
+  }
+}
+
+function togglePrestigeShop(show){
+  const shop = document.getElementById('prestige-shop');
+  const btn = document.getElementById('btn-prestige-shop');
+  if(!shop || !btn) return;
+  const isShown = !shop.classList.contains('hidden');
+  const want = (typeof show === 'boolean') ? show : !isShown;
+  if(want){ shop.classList.remove('hidden'); shop.setAttribute('aria-hidden','false'); btn.classList.add('active'); }
+  else { shop.classList.add('hidden'); shop.setAttribute('aria-hidden','true'); btn.classList.remove('active'); }
+}
+
+function buyPrestigeItem(itemId){
+  const it = PRESTIGE_SHOP_ITEMS.find(x => x.id === itemId);
+  if(!it){ toast('Chybná položka'); return; }
+  if(G.state.prestigePoints < it.cost){ toast('Nemáš dost relikvií'); return; }
+  G.state.prestigePoints -= it.cost;
+  if(typeof it.apply === 'function') it.apply(G.state);
+  saveGame();
+  renderPrestigeShop();
+  renderAll();
+  toast('Koupeno: ' + it.name);
+}
+
+function bindPrestigeUI(){
+  const btn = document.getElementById('btn-prestige-shop'); if(btn) btn.addEventListener('click', ()=> togglePrestigeShop());
+  const btnClose = document.getElementById('btn-close-prestige-shop'); if(btnClose) btnClose.addEventListener('click', ()=> togglePrestigeShop(false));
+  renderPrestigeShop();
+}
 
   // END of module
 })();

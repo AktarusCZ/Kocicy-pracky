@@ -28,28 +28,60 @@
       <div id="click-anim" class="click-anim" aria-hidden="true"></div>
     </section>
 
+    <!-- BUY MODE -->
+    <div class="buy-modes">
+      <button data-buy="1">1</button>
+      <button data-buy="10">10</button>
+      <button data-buy="100">100</button>
+      <button data-buy="max">MAX</button>
+    </div>
+
+    <!-- PANELS -->
     <section class="panels">
-        <div class="panel">
-          <h2>Upgrady</h2>
-          <div id="upgrades"></div>
-        </div>
 
-        <div class="panel">
-          <h2>Automatické</h2>
-          <div id="autoclickers"></div>
-        </div>
+      <div class="panel">
+        <h2>Upgrady</h2>
+        <div id="upgrades"></div>
+      </div>
 
-          </div> 
+      <div class="panel">
+        <h2>Automatické</h2>
+        <div id="autoclickers"></div>
+      </div>
+
+      <!-- v rámci sekce .panels (nahraď podle svého) -->
+      <div class="panel">
         <h2>Prestige</h2>
+
         <div class="prestige-box">
-          <div id="prestige-points">0</div>
-          <button id="btn-prestige" class="primary">Prestige</button>
+          <div class="prestige-count">
+            <span id="prestige-points" class="prestige-display">0</span> relikvií
+          </div>
+
+          <div class="prestige-actions">
+            <button id="btn-prestige" class="primary">Obětovat</button>
+            <button id="btn-prestige-shop" class="secondary">Relikvie</button>
+          </div>
+
+          <!-- malý box pro info / notifikace -->
+          <div id="prestige-note" class="small muted" style="margin-top:10px;">
+            Po obětování získáš relikvie na základě tvého celkového postupu.
+          </div>
         </div>
       </div>
+
+      <div id="prestige-shop" class="panel prestige-shop hidden" aria-hidden="true">
+        <h2>Obchod relikvií</h2>
+        <div id="prestige-items" class="list"></div>
+        <div style="margin-top:12px;">
+          <button id="btn-close-prestige-shop" class="btn-ghost">Zavřít</button>
+        </div>
+      </div>
+
     </section>
 
     <section class="bottom-controls">
-      <button id="btn-reset" class="danger">Reset</button>
+      <button id="btn-reset" class="danger">RESTART CELÉ HRY</button>
       <div class="save-indicator" id="save-indicator">Uloženo</div>
     </section>
   </main>

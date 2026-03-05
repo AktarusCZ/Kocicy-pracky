@@ -227,6 +227,35 @@ font-size:13px;
 margin-top:4px;
 }
 
+.buy-modes{
+display:flex;
+justify-content:center;
+gap:8px;
+margin:10px 0 20px 0;
+}
+
+.buy-modes button{
+
+background:#1c1c1c;
+color:var(--accent);
+border:1px solid rgba(211,163,74,.25);
+padding:6px 12px;
+border-radius:8px;
+cursor:pointer;
+font-family:'EB Garamond', serif;
+font-weight:700;
+
+}
+
+.buy-modes button:hover{
+background:rgba(211,163,74,.1);
+}
+
+.buy-modes button.active{
+background:var(--accent);
+color:#111;
+}
+
 .item .status{
 color:var(--accent);
 font-size:13px;
@@ -287,14 +316,166 @@ filter:brightness(1.1);
   cursor:pointer;
 }
 
-/* prestige bar styled like liga button */
+/* ----------- PRESTIGE & SHOP UI ----------- */
+.prestige-box{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:10px;
+}
+
+.prestige-actions{
+  display:flex;
+  gap:10px;
+  align-items:center; /* zarovnání na stejnou osu */
+}
+
+.prestige-actions button{
+  flex:1;
+  height:44px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:22px;
+  font-weight:700;
+
+  padding:0 16px;
+  margin:0; /* odstraní posun */
+}
+
+/* uprav styly pro primary/secondary pokud používáš stejné třídy */
+#btn-prestige {
+  background: linear-gradient(180deg,#e6b65a,#a97a2b);
+  color:#111;
+  border:none;
+}
+#btn-prestige-shop {
+  background:transparent;
+  border:2px solid rgba(211,163,74,0.12);
+  color:var(--accent);
+  gap:6px;
+}
+
+/* pokud je aktivní (otevřený shop) */
+#btn-prestige-shop.active{
+  background: linear-gradient(180deg,#e6b65a,#a97a2b);
+  color:#111;
+  box-shadow:0 6px 18px rgba(211,163,74,0.12);
+}
+
 .prestige-box .primary{
   display:block;
+  border-radius:22px;
+  padding:10px 12px;
+}
+
+/* --- Prestiges shop panel styling --- */
+#prestige-shop-panel{
+  min-height:160px;
+}
+#prestige-items{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:8px;
+}
+
+.prestige-item .meta { max-width:70%; }
+.prestige-item .cost { color:var(--muted); }
+.prestige-item button { background:var(--accent); color:#111; border-radius:8px; padding:6px 10px; border:none; }
+
+/* malé tlačítko zavřít */
+#btn-close-prestige-shop{
+  margin-top:12px;
+  background:transparent;
+  color:var(--accent);
+  border:1px solid rgba(211,163,74,0.12);
+  padding:8px 10px;
+  border-radius:8px;
+}
+/* tlačítka v prestige shopu (koupit) */
+.prestige-shop .item button {
+  min-width:92px;
+  padding:6px 10px;
+  border-radius:8px;
+}
+
+/* skrytí */
+.hidden{ display:none; }
+
+#prestige-points{
+color:var(--accent);
+font-size:22px;
+font-weight:800;
+
+text-shadow:
+0 0 8px rgba(211,163,74,.6),
+0 0 16px rgba(211,163,74,.3);
+
+margin-bottom:8px;
+}
+
+/* prestiž shop */
+.prestige-shop{
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.35));
+  border-radius:12px;
+  padding:14px;
+  border:1px solid rgba(211,163,74,0.12);
+}
+
+.prestige-shop h3{
+margin-top:0;
+color:#d3a34a;
+}
+
+#btn-close-prestige-shop{
+
+margin-top:10px;
+
+background:#222;
+color:#d3a34a;
+
+border:1px solid #d3a34a;
+border-radius:6px;
+
+padding:6px 12px;
+cursor:pointer;
+
+}
+
+#prestige-items{
+
+display:flex;
+flex-direction:column;
+gap:10px;
+
+margin-top:12px;
+
+}
+
+.hidden{
+display:none;
+}
+
+.prestige-count{
+  color:var(--accent);
+  font-size:18px;
+  font-weight:700;
   width:100%;
   margin-top:8px;
-  text-align:center;
-  border-radius:14px;
   padding:10px 12px;
+}
+
+.prestige-display{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:10px;
+  border:2px solid rgba(211,163,74,0.28);
+  color:var(--accent);
+  font-weight:800;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
 }
 
 /* --------------------------
