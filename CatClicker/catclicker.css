@@ -275,6 +275,29 @@ transition:.15s;
 .item button:hover{
 filter:brightness(1.1);
 }
+
+.upgrade-tabs{
+display:flex;
+gap:8px;
+margin-bottom:12px;
+}
+
+.upgrade-tabs button{
+flex:1;
+background:#1c1c1c;
+color:var(--accent);
+border:1px solid rgba(211,163,74,.25);
+padding:6px 12px;
+border-radius:8px;
+cursor:pointer;
+font-family:'EB Garamond', serif;
+font-weight:700;
+}
+
+.upgrade-tabs button.active{
+background:var(--accent);
+color:#111;
+}
 /* --------------------------
    Buttons (slavné stylové tlačítka)
    -------------------------- */
