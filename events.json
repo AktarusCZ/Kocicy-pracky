@@ -1,5 +1,15 @@
 [
    {
+    "quizName": "Simpsonovi",
+    "date": "24.3.2026",
+    "points": 36,
+    "position": 3,
+    "description": "Mňau-ehoy! Ve Springfieldu jsme na kvízu chytali body rychleji než Lisa saxofonové sólo.",
+    "photos": [
+      "https://raw.githubusercontent.com/AktarusCZ/Kocicy-pracky/main/06.jpg"
+    ]
+  },
+   {
     "quizName": "Co to je?",
     "date": "17.3.2026",
     "points": 29.5,
