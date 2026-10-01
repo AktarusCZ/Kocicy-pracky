@@ -1,5 +1,35 @@
 [
    {
+    "quizName": "DISNEY PRINCEZY",
+    "date": "29.9.2026",
+    "points": 41.5,
+    "position": 11,
+    "description": "",
+    "photos": [
+      ""
+    ]
+  },
+   {
+    "quizName": "METALOVÝ POSLECH",
+    "date": "15.9.2026",
+    "points": 27,
+    "position": 2,
+    "description": "",
+    "photos": [
+      ""
+    ]
+  },
+   {
+    "quizName": "PAMÁTKY",
+    "date": "1.9.2026",
+    "points": 28.5,
+    "position": 13,
+    "description": "",
+    "photos": [
+      ""
+    ]
+  },
+   {
     "quizName": "ZÁVĚREČNÝ VĚDOMOSTNÍ KVÍZ",
     "date": "30.6.2026",
     "points": 26,
