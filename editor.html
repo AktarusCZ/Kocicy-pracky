@@ -96,25 +96,22 @@ Promise.all([
     if (!response.ok) throw new Error('Načtení kvízů selhalo');
     return response.json();
   }),
-  fetch('index.html', {cache:'no-cache'}).then(response => {
+  fetch('members.json', {cache:'no-cache'}).then(response => {
     if (!response.ok) throw new Error('Načtení týmu selhalo');
-    return response.text();
+    return response.json();
   })
-]).then(([data, html]) => {
+]).then(([data, members]) => {
   if (!Array.isArray(data)) throw new Error('Neplatný seznam kvízů');
   events = data;
-  const page = new DOMParser().parseFromString(html, 'text/html');
-  const cards = [...page.querySelectorAll('.member[data-member]')];
-  if (!cards.length) throw new Error('Seznam týmu je prázdný');
+  if (!Array.isArray(members)) throw new Error('Neplatný seznam členů');
   const options = document.getElementById('member-options');
-  cards.forEach(card => {
+  members.forEach(member => {
     const label = document.createElement('label');
     const input = document.createElement('input');
     input.type = 'checkbox';
-    input.value = card.dataset.member;
+    input.value = member.id;
     input.addEventListener('change', updateMemberCount);
-    const name = card.querySelector('span')?.textContent.replace('🐾', '').trim() || card.dataset.member;
-    label.append(input, document.createTextNode(name));
+    label.append(input, document.createTextNode(member.name));
     options.appendChild(label);
   });
   [...new Set(events.map(q => q.league).filter(Boolean))].forEach(league => {
@@ -124,9 +121,9 @@ Promise.all([
   });
   loaded = true;
   document.getElementById('add').disabled = false;
-  document.getElementById('status').textContent = `Načteno ${events.length} kvízů a ${cards.length} členů týmu.`;
+  document.getElementById('status').textContent = `Načteno ${events.length} kvízů a ${members.length} členů týmu.`;
 }).catch(() => {
-  document.getElementById('status').textContent = 'Kvízy nebo členy týmu se nepodařilo načíst. Otevři editor přes web nebo místní HTTP server a zkontroluj events.json a index.html.';
+  document.getElementById('status').textContent = 'Kvízy nebo členy týmu se nepodařilo načíst. Otevři editor přes web nebo místní HTTP server a zkontroluj events.json a members.json.';
 });
 
 function selectedMembers() {

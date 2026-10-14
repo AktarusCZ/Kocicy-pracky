@@ -1,0 +1,77 @@
+[
+  {
+    "id": "Terka",
+    "name": "Terka",
+    "icon": "🧠"
+  },
+  {
+    "id": "Honza",
+    "name": "Honza B.",
+    "icon": "🐱"
+  },
+  {
+    "id": "Radek",
+    "name": "Radek",
+    "icon": "🦊"
+  },
+  {
+    "id": "Simca",
+    "name": "Simča",
+    "icon": "👑"
+  },
+  {
+    "id": "Jirka",
+    "name": "Jirka",
+    "icon": "⭐"
+  },
+  {
+    "id": "Barca",
+    "name": "Barča",
+    "icon": "📸"
+  },
+  {
+    "id": "HonzaO",
+    "name": "Honza O.",
+    "icon": "🐾"
+  },
+  {
+    "id": "Misa",
+    "name": "Míša",
+    "icon": "🐾"
+  },
+  {
+    "id": "Kacka",
+    "name": "Kačka",
+    "icon": "🐾"
+  },
+  {
+    "id": "Michal",
+    "name": "Michal",
+    "icon": "🐾"
+  },
+  {
+    "id": "Martin",
+    "name": "Martin",
+    "icon": "🐾"
+  },
+  {
+    "id": "HonzaK",
+    "name": "Honza K.",
+    "icon": "🐾"
+  },
+  {
+    "id": "Pepa",
+    "name": "Pepa",
+    "icon": "🐾"
+  },
+  {
+    "id": "Ren",
+    "name": "Ren",
+    "icon": "🐾"
+  },
+  {
+    "id": "Tomas",
+    "name": "Tomas",
+    "icon": "🐾"
+  }
+]
