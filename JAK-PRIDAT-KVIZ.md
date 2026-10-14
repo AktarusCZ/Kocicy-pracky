@@ -77,3 +77,9 @@ Jména v seznamu účastníků se převádějí z ID na zobrazovaná jména podl
 Kvízy se zobrazují v samostatných skupinách: **rok → liga → kvízy**. Pod každou ligou je její celkový součet bodů. Filtr roku nebo ligy mění viditelné kvízy, nikoli celkový počet bodů dané pojmenované ligy. Pokud jedna liga zasahuje do více roků, její součet zahrnuje celý průběh ligy. Pro různé sezóny používej rozdílné názvy včetně roku, například PODZIMNÍ LIGA ROCKLE 2026 a JARNÍ LIGA ROCKLE 2027.
 
 Záznamy bez ligy jsou samostatně pod Liga neuvedena a sčítají se pouze v rámci daného roku. Žádné roční součty všech lig se v přehledu nevypisují.
+
+## Oprava načítání vzhledu
+
+Aktuální index.html obsahuje CSS i JavaScript přímo. Při změnách vzhledu či chování upravuj vložené části v index.html; samostatné css/site.css a js/site.js jsou pracovní podklady a web je nyní nenačítá. Data se dál načítají z events.json a members.json, obrázky ze složky assets.
+
+WEB-PRO-GITHUB.zip je kompletní balíček pro nahrání. Rozbal ho a nahraj obsah se zachováním složek do kořene repozitáře (tam, kde je index.html). Samotný ZIP web nezveřejní. Pro opravu bílého vzhledu stačí nahradit index.html; pro kompletní vizuál nahraj i assets. Balíček zahrnuje data i hry.
