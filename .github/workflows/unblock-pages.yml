@@ -1,0 +1,33 @@
+name: Unblock GitHub Pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      deployment_id:
+        description: 'ID zaseknuteho Pages nasazeni z chybove hlasky'
+        required: true
+        default: 'b386fc91353efec222136f1cf576114eed57ab72'
+        type: string
+
+permissions:
+  pages: write
+
+jobs:
+  cancel-deployment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Cancel stuck Pages deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEPLOYMENT_ID: ${{ inputs.deployment_id }}
+        shell: bash
+        run: |
+          if [[ ! "$DEPLOYMENT_ID" =~ ^[a-fA-F0-9]{40}$ ]]; then
+            echo "Deployment ID must be the 40-character ID from the Pages error."
+            exit 1
+          fi
+          gh api --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/pages/deployments/$DEPLOYMENT_ID/cancel"
+          echo "Cancellation requested. Wait for it to finish before retrying Pages deployment."
