@@ -2,6 +2,7 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Editor událostí – Kočičí pracky</title>
 
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
@@ -16,6 +17,7 @@ body {
   padding: 40px;
 }
 input, textarea, button {
+  box-sizing: border-box;
   width: 100%;
   margin-bottom: 15px;
   padding: 10px;
@@ -42,6 +44,11 @@ pre {
   border-radius: 10px;
   max-height: 200px;
 }
+fieldset{border:1px solid #555;border-radius:10px;margin:0 0 15px;padding:15px;}
+#member-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;}
+#member-options label{display:flex;align-items:center;gap:8px;}
+#member-options input{width:auto;margin:0;padding:0;}
+label.field{display:block;margin-bottom:5px;}pre{overflow:auto;}button:disabled{opacity:.5;}
 </style>
 </head>
 
@@ -49,16 +56,33 @@ pre {
 
 <h2>✍️ Editor událostí</h2>
 
+<p>Formulář načte stávající kvízy a přidá nový. Staženým souborem events.json pak nahraď soubor na GitHubu.</p>
+<p id="status">Načítám stávající kvízy…</p>
+<label class="field" for="quizName">Název kvízu</label>
 <input id="quizName" placeholder="Název kvízu">
-<input id="date" placeholder="Datum (DD.MM.RRRR)">
-<input id="points" type="number" placeholder="Body">
-<input id="position" type="number" placeholder="Umístění">
+<label class="field" for="date">Datum kvízu</label>
+<input id="date" placeholder="DD.MM.RRRR">
+<label class="field" for="position">Umístění</label>
+<input id="position" type="number" min="1" step="1" placeholder="Například 11">
+<label class="field" for="totalTeams">Celkový počet týmů</label>
+<input id="totalTeams" type="number" min="1" step="1" placeholder="Například 22">
+<fieldset>
+  <legend>Účastníci — vyber členy týmu</legend>
+  <div id="member-options"></div>
+  <p>Počet lidí: <strong id="member-count">0</strong></p>
+</fieldset>
+<label class="field" for="points">Počet získaných bodů</label>
+<input id="points" type="number" min="0" step="0.5" placeholder="Například 35.5">
+<label class="field" for="league">Liga / sezóna</label>
+<input id="league" list="league-options" placeholder="Například Podzimní liga 2026">
+<datalist id="league-options"></datalist>
 <textarea id="desc" placeholder="Popis"></textarea>
 
 <!-- Přidání pole pro zadání URL obrázků -->
 <textarea id="photos" placeholder="Zadejte URL obrázků, oddělené čárkou (např. https://github.com/obrazek1.jpg, https://github.com/obrazek2.jpg)"></textarea>
 
-<button onclick="addEvent()">Přidat</button>
+<button id="add" onclick="addEvent()" disabled>Přidat kvíz</button>
+<button id="download" onclick="downloadEvents()" disabled>Stáhnout celý events.json</button>
 
 <!-- Oblast pro zobrazení události a koláže obrázků -->
 <div id="collage"></div>
@@ -66,42 +90,104 @@ pre {
 
 <script>
 let events = [];
+let loaded = false;
+Promise.all([
+  fetch('events.json', {cache:'no-cache'}).then(response => {
+    if (!response.ok) throw new Error('Načtení kvízů selhalo');
+    return response.json();
+  }),
+  fetch('index.html', {cache:'no-cache'}).then(response => {
+    if (!response.ok) throw new Error('Načtení týmu selhalo');
+    return response.text();
+  })
+]).then(([data, html]) => {
+  if (!Array.isArray(data)) throw new Error('Neplatný seznam kvízů');
+  events = data;
+  const page = new DOMParser().parseFromString(html, 'text/html');
+  const cards = [...page.querySelectorAll('.member[data-member]')];
+  if (!cards.length) throw new Error('Seznam týmu je prázdný');
+  const options = document.getElementById('member-options');
+  cards.forEach(card => {
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.value = card.dataset.member;
+    input.addEventListener('change', updateMemberCount);
+    const name = card.querySelector('span')?.textContent.replace('🐾', '').trim() || card.dataset.member;
+    label.append(input, document.createTextNode(name));
+    options.appendChild(label);
+  });
+  [...new Set(events.map(q => q.league).filter(Boolean))].forEach(league => {
+    const option = document.createElement('option');
+    option.value = league;
+    document.getElementById('league-options').appendChild(option);
+  });
+  loaded = true;
+  document.getElementById('add').disabled = false;
+  document.getElementById('status').textContent = `Načteno ${events.length} kvízů a ${cards.length} členů týmu.`;
+}).catch(() => {
+  document.getElementById('status').textContent = 'Kvízy nebo členy týmu se nepodařilo načíst. Otevři editor přes web nebo místní HTTP server a zkontroluj events.json a index.html.';
+});
+
+function selectedMembers() {
+  return [...document.querySelectorAll('#member-options input:checked')].map(input => input.value);
+}
+function updateMemberCount() {
+  document.getElementById('member-count').textContent = selectedMembers().length;
+}
 
 function addEvent() {
-  // Získáme zadané URL obrázků
-  let photosInput = document.getElementById('photos').value.trim();
-  let photoUrls = photosInput.split(',').map(url => url.trim()).filter(url => url !== "");
-
-  // Přidáme novou událost do seznamu
-  let newEvent = {
-    quizName: document.getElementById('quizName').value,
-    date: document.getElementById('date').value,
-    points: Number(document.getElementById('points').value),
-    position: Number(document.getElementById('position').value),
-    description: document.getElementById('desc').value
+  if (!loaded) return;
+  const read = id => document.getElementById(id).value.trim();
+  const date = read('date').replace(/\s+/g, '');
+  const match = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(date);
+  const parsed = match ? new Date(+match[3], +match[2]-1, +match[1]) : null;
+  const points = Number(read('points'));
+  const position = Number(read('position'));
+  const totalTeams = Number(read('totalTeams'));
+  const members = selectedMembers();
+  if (!read('quizName') || !parsed || parsed.getFullYear() !== +match[3] ||
+      parsed.getMonth() !== +match[2]-1 || parsed.getDate() !== +match[1] ||
+      !read('points') || !Number.isFinite(points) || points < 0 ||
+      !read('position') || !Number.isInteger(position) || position < 1 ||
+      !read('totalTeams') || !Number.isInteger(totalTeams) || totalTeams < position ||
+      !read('league') || !members.length) {
+    alert('Vyplň název, platné datum DD.MM.RRRR, body, umístění, počet týmů a ligu. Vyber alespoň jednoho účastníka. Umístění musí být od 1 do celkového počtu týmů.');
+    return;
+  }
+  const newEvent = {
+    quizName: read('quizName'), date, points, position, totalTeams,
+    league: read('league'), members,
+    description: read('desc'),
+    photos: read('photos').split(',').map(x => x.trim()).filter(Boolean)
   };
-
-  // Pokud jsou přítomny obrázky, přidáme je do události
-  if (photoUrls.length > 0) {
-    newEvent.photos = photoUrls;
-  }
-
-  // Přidáme událost na začátek seznamu
   events.unshift(newEvent);
-
-  // Zobrazíme koláž obrázků
-  let collageContainer = document.getElementById('collage');
-  collageContainer.innerHTML = ''; // Vyčistíme předchozí obrázky
-  if (photoUrls.length > 0) {
-    photoUrls.forEach(url => {
-      let img = document.createElement('img');
-      img.src = url;
-      collageContainer.appendChild(img);
-    });
-  }
-
-  // Zobrazíme všechny události v JSON formátu
   document.getElementById('output').textContent = JSON.stringify(events, null, 2);
+  document.getElementById('download').disabled = false;
+  document.getElementById('status').textContent = `Připraveno ${events.length} kvízů. Stáhni events.json a nahraď jím soubor na GitHubu. Změny ve formuláři se do stažení neukládají.`;
+  const collage = document.getElementById('collage');
+  collage.replaceChildren();
+  newEvent.photos.forEach(url => {
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = newEvent.quizName;
+    collage.appendChild(img);
+  });
+  ['quizName','date','points','position','totalTeams','desc','photos'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.querySelectorAll('#member-options input').forEach(input => input.checked = false);
+  updateMemberCount();
+}
+
+function downloadEvents() {
+  if (!loaded) return;
+  const url = URL.createObjectURL(new Blob([JSON.stringify(events, null, 2) + '\n'], {type:'application/json'}));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'events.json';
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 </script>
 

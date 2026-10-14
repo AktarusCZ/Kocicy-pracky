@@ -171,119 +171,27 @@ section h3{
 
 .small{font-size:14px;font-style:italic;color:var(--muted);}
 
-/* EVENTS */
-.event{
-  margin-bottom:45px;
-  padding-bottom:35px;
-  border-bottom:1px solid #2a2a2a;
-  transition:.3s;
-}
-.event:hover{
-  transform:translateY(-4px);
-  box-shadow:0 10px 30px rgba(0,0,0,0.35);
-}
-.event:last-child{border-bottom:none;}
+/* EVENTS, TEAM, QUIZZES */
+.event{margin-bottom:45px;padding-bottom:35px;border-bottom:1px solid #2a2a2a;}
 .event h4{color:var(--gold);font-size:22px;}
-
-.event-photos{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:14px;
-  margin:18px auto 0;
-  max-width:70%;
-}
-.event-photos img{
-  width:100%;
-  border-radius:12px;
-  cursor:pointer;
-  transition:transform .3s ease;
-}
-.event-photos img:hover{
-  transform:scale(1.05);
-}
-
-/* TEAM */
-.team-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-}
-.member{
-  background:#202020;
-  border-radius:14px;
-  padding:20px;
-  text-align:center;
-  transition:.3s;
-}
-.member:hover{
-  transform:translateY(-4px);
-  box-shadow:0 10px 30px rgba(0,0,0,0.35);
-}
+.event-photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin:18px auto 0;max-width:70%;}
+.event-photos img{width:100%;border-radius:12px;cursor:pointer;}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;}
+.member{background:#202020;border-radius:14px;padding:20px;text-align:center;transition:.3s;}
+.member:hover,.event:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.35);}
 .member strong{display:block;color:var(--gold);margin-bottom:6px;}
 .member span{color:var(--muted);font-style:italic;}
-
-/* QUIZZES */
 .quiz-year{margin-bottom:45px;}
-.year-header{
-  display:flex;
-  justify-content:space-between;
-  border-bottom:1px solid #2a2a2a;
-  margin-bottom:15px;
-}
-.year{
-  font-size:26px;
-  font-weight:800;
-  color:var(--gold);
-}
-ul{list-style:none;padding:0;margin:0;}
-li{
-  padding:12px 0;
-  border-bottom:1px dashed #2a2a2a;
-}
-li:last-child{border-bottom:none;}
-
-.quiz-members{
-  margin-top:6px;
-  font-size:14px;
-  color:var(--muted);
-  font-style:italic;
-}
-
-/* LIGA */
-.liga{
-  text-align:center;
-  background:
-    radial-gradient(circle at top, rgba(211,163,74,0.18), transparent 60%),
-    linear-gradient(180deg,#1c1c1c,#111);
-}
-.liga-buttons{
-  display:flex;
-  gap:30px;
-  margin-top:40px;
-}
-.liga-btn{
-  flex:1;
-  padding:18px 0;
-  border-radius:60px;
-  font-weight:700;
-  text-decoration:none;
-}
-.liga-btn.primary{background:var(--gold);color:#111;}
-.liga-btn.secondary{border:1px solid var(--gold);color:var(--gold);}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  color:var(--muted);
-  padding:60px 20px;
-  font-size:14px;
-}
-
-/* ANIMACE */
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(25px);}
-  to{opacity:1;transform:none;}
-}
+.year-header{display:flex;justify-content:space-between;border-bottom:1px solid #2a2a2a;margin-bottom:15px;}
+.year{font-size:26px;font-weight:800;color:var(--gold);}
+ul{list-style:none;padding:0;margin:0;}li{padding:12px 0;border-bottom:1px dashed #2a2a2a;}li:last-child{border-bottom:none;}
+.quiz-members{margin-top:6px;font-size:14px;color:var(--muted);font-style:italic;}
+.liga{text-align:center;background:radial-gradient(circle at top,rgba(211,163,74,.18),transparent 60%),linear-gradient(180deg,#1c1c1c,#111);}
+.liga-buttons{display:flex;gap:30px;margin-top:40px;}
+.liga-btn{flex:1;padding:18px 0;border-radius:60px;font-weight:700;text-decoration:none;}
+.liga-btn.primary{background:var(--gold);color:#111;}.liga-btn.secondary{border:1px solid var(--gold);color:var(--gold);}
+footer{text-align:center;color:var(--muted);padding:60px 20px;font-size:14px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(25px);}to{opacity:1;transform:none;}}
 
 /* LIGHTBOX */
 .lightbox{
@@ -676,233 +584,71 @@ function parseCZDate(str){
   return new Date(p[2],p[1]-1,p[0]);
 }
 
-/* EVENTS */
-fetch("events.json")
-.then(r=>r.json())
-.then(data=>{
-  data.sort((a,b)=>parseCZDate(b.date)-parseCZDate(a.date));
-  const el=document.getElementById("events");
-  data.forEach(e=>{
-    let photos="";
-    if(e.photos&&e.photos.length){
-      photos='<div class="event-photos">';
-      e.photos.forEach(p=>photos+=`<img src="${p}" loading="lazy">`);
-      photos+='</div>';
-    }
-    el.innerHTML+=`
+/* Kvízy a události mají společný zdroj v events.json. */
+function escapeHTML(value){
+  return String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  }[char]));
+}
+
+function quizDetails(q){
+  const placing = q.position > 0
+    ? `${q.position}${q.totalTeams > 0 ? ` z ${q.totalTeams} týmů` : '. místo (počet týmů neuveden)'}`
+    : 'Umístění neuvedeno';
+  return `${escapeHTML(q.date)} · ${escapeHTML(placing)} · ${escapeHTML(q.points)} bodů · Liga: ${escapeHTML(q.league || 'neuvedena')}`;
+}
+function quizMembers(q){
+  const members = Array.isArray(q.members) ? q.members : [];
+  return members.length ? `Účastníci (${members.length}): ${members.map(escapeHTML).join(' | ')}` : 'Účastníci neuvedeni';
+}
+
+fetch("events.json", {cache:"no-cache"})
+.then(response=>{
+  if(!response.ok) throw new Error("Nepodařilo se načíst events.json");
+  return response.json();
+})
+.then(quizzes=>{
+  if(!Array.isArray(quizzes)) throw new Error("events.json musí obsahovat seznam kvízů");
+  quizzes.sort((a,b)=>parseCZDate(b.date)-parseCZDate(a.date));
+  document.getElementById("events").innerHTML=quizzes.map(q=>{
+    const photos=(q.photos || []).filter(p=>typeof p==="string" && p.trim());
+    return `
       <div class="event">
-        <h4>${e.quizName}</h4>
-        <div class="small">${e.date} · ${e.points} bodů · ${e.position}. místo</div>
-        <p>${e.description}</p>
-        ${photos}
-      </div>
-    `;
+        <h4>${escapeHTML(q.quizName)}</h4>
+        <div class="small">${quizDetails(q)}</div>
+        <div class="quiz-members">${quizMembers(q)}</div>
+        ${q.description ? `<p>${escapeHTML(q.description)}</p>` : ''}
+        ${photos.length ? `<div class="event-photos">${photos.map(p=>`<img src="${escapeHTML(p)}" alt="Fotografie z kvízu ${escapeHTML(q.quizName)}" loading="lazy">`).join('')}</div>` : ''}
+      </div>`;
+  }).join('');
+
+  renderTeamActivity(quizzes);
+  const byYear={};
+  quizzes.forEach(q=>{
+    const year=parseCZDate(q.date).getFullYear();
+    if(!byYear[year]) byYear[year]=[];
+    byYear[year].push(q);
   });
-});
-
-/* QUIZZES */
-const quizzes=[
-  {
-    name: "DISNEY PRINCEZY",
-    date: "29.9.2026",
-    points: 41.5,
-    position: 11,
-    members:["Honza, Simca, Ren, Terka, Radek, Jirka"]
-  },
-   {
-    name: "METALOVÝ POSLECH",
-    date: "15.9.2026",
-    points: 27,
-    position: 2,
-    members:["Honza, Radek, Terka"]
-  },
-   {
-    name: "PAMÁTKY",
-    date: "1.9.2026",
-    points: 28.5,
-    position: 13,
-    members:["Honza"]
-  },
-  
-  {
-    name:"ZÁVĚREČNÝ VĚDOMOSTNÍ KVÍZ",
-    date:"30. 6. 2026",
-    points:26,
-    position:17,
-    members:["Honza"]
-  },
-  {
-    name:"COVER SONGY",
-    date:"23. 6. 2026",
-    points:16.5,
-    position:16,
-    members:["Simca","HonzaK"]
-  },
-  {
-    name:"THE 1990s - 90's HITY",
-    date:"26. 5. 2026",
-    points:34.5,
-    position:7,
-    members:["Simca","Radek","Terka"]
-  },
-  {
-    name:"FILMOVÉ HLÁŠKY",
-    date:"12. 5. 2026",
-    points:36,
-    position:6,
-    members:["Simca","Radek","Honza"]
-  },
-    {
-    name:"POZNEJ FILM PODLE FOTKY",
-    date:"21. 4. 2026",
-    points:25,
-    position:19,
-    members:["Terka","Radek","Honza"]
-  },
-    {
-    name:"ČETNICKÉ HUMORESKY",
-    date:"7. 4. 2026",
-    points:25.5,
-    position:7,
-    members:["Simca","HonzaK","Honza, Ren"]
-  },
-  {
-    name:"FILMONÉ ZNĚLKY",
-    date:"31. 3. 2026",
-    points:25,
-    position:18,
-    members:["Terka","Radek","Honza"]
-  },
-   {
-    name:"SIMPSONOVI",
-    date:"24. 3. 2026",
-    points:36,
-    position:3,
-    members:["Simca","Radek","Honza"]
-  },
-  {
-    name:"CO TO JE?",
-    date:"17. 3. 2026",
-    points:29.5,
-    position:5,
-    members:["Simca","HonzaK","Honza"]
-  },
-  {
-    name:"HARRY POTTER",
-    date:"10. 3. 2026",
-    points:34.5,
-    position:14,
-    members:["Simca","Terka","Honza","Radek","Jirka","Michal","Pepa"]
-  },
-  {
-    name:"LEGENDÁRNÍ MEME",
-    date:"3. 3. 2026",
-    points:35.5,
-    position:4,
-    members:["Simca","Terka","Honza","Radek","Jirka","HonzaK","Pepa"]
-  },
-  {
-    name:"ZNĚLKY POŘADŮ",
-    date:"24. 2. 2026",
-    points:24,
-    position:5,
-    members:["Simca","Terka","Honza","Radek","Michal"]
-  },
-  {
-    name:"POZNEJ MÍSTO",
-    date:"17. 2. 2026",
-    points:31,
-    position:4,
-    members:["Simca","Terka","Honza","Radek","Jirka","Michal","HonzaK"]
-  },
-  {
-    name:"PÁN PRSTENŮ",
-    date:"10. 2. 2026",
-    points:23,
-    position:18,
-    members:["Simca","Martin","Honza"]
-  },
-  {
-    name:"SERIÁLOVÉ ZNĚLKY",
-    date:"27. 1. 2026",
-    points:21.5,
-    position:14,
-    members:["Terka","Radek","Honza"]
-  },
-  {
-    name:"STRANGER THINGS",
-    date:"20. 1. 2026",
-    points:28.5,
-    position:10,
-    members:["Honza","Michal","Simca","Terka","Radek"]
-  },
-  {
-    name:"JAK JSEM POZNAL VAŠI MATKU",
-    date:"25. 11. 2025",
-    points:0,
-    position:4,
-    members:["Terka","Barca","Radek","Honza"]
-  },
-  {
-    name:"FILMOVÉ ZNĚLKY",
-    date:"11. 11. 2025",
-    points:0,
-    position:0,
-    members:["Honza","Simca","HonzaO","Jirka","Terka"]
-  },
-  {
-    name:"PIRÁTI Z KARIBIKU",
-    date:"14. 10. 2025",
-    points:0,
-    position:0,
-    members:["Terka","Radek","Honza","Simca","Misa","Kacka","Barca"]
-  }
-];
-
-
-quizzes.sort((a,b)=>parseCZDate(b.date)-parseCZDate(a.date));
-const byYear={};
-quizzes.forEach(q=>{
-  const y=parseCZDate(q.date).getFullYear();
-  if(!byYear[y])byYear[y]=[];
-  byYear[y].push(q);
-});
-
-const qEl=document.getElementById("quizList");
-Object.keys(byYear).sort((a,b)=>b-a).forEach(year=>{
-
-  const total = byYear[year].reduce((s,q)=>s+q.points,0);
-
-  let html = `
-    <div class="quiz-year">
+  document.getElementById("quizList").innerHTML=Object.keys(byYear).sort((a,b)=>b-a).map(year=>{
+    const total=byYear[year].reduce((sum,q)=>sum+Number(q.points),0);
+    return `<div class="quiz-year">
       <div class="year-header">
         <span class="year">${year}</span>
         <span class="small">Celkem ${total} bodů</span>
       </div>
-      <ul>
-  `;
-
-  byYear[year].forEach(q=>{
-
-    const membersLine = Array.isArray(q.members) && q.members.length
-      ? `<div class="quiz-members">${q.members.join(" | ")}</div>`
-      : `<div class="quiz-members">—</div>`;
-
-    html += `
-      <li>
-        <strong>${q.name}</strong><br>
-        <span class="small">${q.date} · ${q.points} bodů · ${q.position}. místo</span>
-        ${membersLine}
-      </li>
-    `;
-  });
-
-  html += `
-      </ul>
-    </div>
-  `;
-
-  qEl.innerHTML += html;
+      <ul>${byYear[year].map(q=>`<li>
+        <strong>${escapeHTML(q.quizName)}</strong><br>
+        <span class="small">${quizDetails(q)}</span>
+        <div class="quiz-members">${quizMembers(q)}</div>
+      </li>`).join('')}</ul>
+    </div>`;
+  }).join('');
+})
+.catch(error=>{
+  console.error(error);
+  const message="Kvízy se nepodařilo načíst. Zkontrolujte soubor events.json a obnovte stránku.";
+  document.getElementById("events").textContent=message;
+  document.getElementById("quizList").textContent=message;
 });
 
 /* LIGHTBOX */
@@ -930,6 +676,7 @@ document.addEventListener("keydown",e=>{
    TEAM ACTIVITY FROM QUIZZES
    =============================== */
 
+function renderTeamActivity(quizzes){
 const activityCount = {};
 
 // 1️⃣ SPOČÍTAT ÚČASTI
@@ -961,6 +708,7 @@ document.querySelectorAll(".member").forEach(card=>{
     el.innerHTML = `${count}${medal}`;
   }
 });
+}
   /* =========================
    GAME MODAL LOGIC
    ========================= */
