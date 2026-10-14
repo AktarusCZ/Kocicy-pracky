@@ -71,7 +71,12 @@
   },
   {
     "id": "Tomas",
-    "name": "Tomáš",
+    "name": "Tomáš S.",
+    "icon": "🐾"
+  },
+    {
+    "id": "TomasP",
+    "name": "Tomáš P.",
     "icon": "🐾"
   }
 ]
