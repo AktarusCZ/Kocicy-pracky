@@ -125,7 +125,8 @@ function renderTeam(){
   const ranking = [...counts].filter(([,count])=>count>0).sort((a,b)=>b[1]-a[1]).slice(0,3);
   const ranks = new Map(ranking.map(([id],i)=>[id,i+1]));
   $('teamCount').textContent = `${members.length} členů`;
-  $('teamList').innerHTML = members.map(m=>{
+  const sortedMembers = [...members].sort((a,b)=>counts.get(b.id)-counts.get(a.id));
+  $('teamList').innerHTML = sortedMembers.map(m=>{
     const rank = ranks.get(m.id), count = counts.get(m.id);
     return `<article class="member" data-member="${escapeHTML(m.id)}">
       ${rank ? `<span class="rank rank-${rank}" aria-label="${rank}. místo v počtu účastí">${rank}</span>` : ''}
