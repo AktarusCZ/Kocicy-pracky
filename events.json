@@ -1,5 +1,21 @@
 [
     {
+    "quizName": "POZNEJ FILM PODLE FOTKY",
+    "date": "20.10.2026",
+    "points": 23,
+    "position": 25,
+    "description": "",
+    "photos": [],
+    "members": [
+      "Honza",
+      "Terka",
+      "Radek",
+      "Jirka"
+    ],
+    "totalTeams": 25,
+    "league": "PODZIMNÍ LIGA ROCKLE 2026"
+  },
+    {
     "quizName": "PÁN PRSTENŮ",
     "date": "13.10.2026",
     "points": 28,
